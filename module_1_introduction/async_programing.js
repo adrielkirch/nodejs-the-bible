@@ -4,7 +4,7 @@ const EventEmitter = require('events');
 class MyEmitter extends EventEmitter {}
 
 /**
- * Function with a callback.
+ * Function with a callback.x   
  * @param {Function} callback - The callback function to be executed.
  */
 function asyncFunctionWithCallback(callback) {
