@@ -1,6 +1,42 @@
 /**
  * Everything in JavaScript is An Object 
- * First let's create an Object using avaScript Object Notation (JSON)
+ * When you to copy an object in JavaScript assign it to a new variable it will always point to memory insted of create a duplicate
+ */
+const obj1 = { a: 'a', b: 'b', c:'c' };
+const obj2 = obj1
+obj2.a = '1'
+obj2.b = '2'
+obj2.c = '3'
+
+console.assert(obj1.a, obj2.a);
+console.assert(obj1.b, obj2.b);
+console.assert(obj1.c, obj2.c);
+
+//This will also create a shallow copy of the object
+const obj3 = { ...obj2 };
+obj3.a = '1'
+obj3.b = '2'
+obj3.c = '3'
+
+console.assert(obj3.a, obj2.a);
+console.assert(obj3.b, obj2.b);
+console.assert(obj3.c, obj2.c);
+
+/**
+ * In following away you can really create a "deep" copy using JSON.stringify() and JSON.parse()
+ */
+// Deep copy
+const obj4 = JSON.parse(JSON.stringify(obj3));
+obj4.a = 'z'; 
+obj4.b = 'y'; 
+obj4.c = 'x';
+console.assert(obj4.a !== obj3.a, 'obj4.a should be different from obj2.a');
+console.assert(obj4.b !== obj3.b, 'obj4.b should be different from obj2.b');
+console.assert(obj4.c !== obj3.c, 'obj4.c should be different from obj2.c');
+
+/**
+ * Everything in JavaScript is An Object 
+ * Let's create an Object using avaScript Object Notation (JSON)
  */
 const person1 = {
     name: 'John',
