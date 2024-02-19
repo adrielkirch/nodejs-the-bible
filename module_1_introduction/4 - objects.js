@@ -51,6 +51,7 @@ person1.gender = 'Male';
 person1.age = person1.age + 1;
 person1['city'] = 'New jersey';
 console.assert(person1['city'], 'New jersey')
+
 // Deleting a property
 delete person1.city;
 
