@@ -35,6 +35,8 @@ const urls = [
   "http://jsonplaceholder.typicode.com/posts/3",
 ];
 
+console.table(urls);
+
 const promises = urls.map((url) => fetchData(url));
 
 // Using Promise.all to fetch data from multiple APIs concurrently, for each Promise will be stored in an Array of Objects order by first resolved
@@ -77,3 +79,4 @@ console.log("Promise.resolve:", resolvedPromise);
 // Using Promise.reject to create a rejected promise with a specific reason
 //const rejectedPromise = Promise.reject(new Error("Rejected reason"));
 //console.log("Promise.reject:", rejectedPromise);
+
