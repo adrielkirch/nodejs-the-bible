@@ -1,4 +1,6 @@
-# Project Name
+# Easy node.js
+
+Node.js will be too easy learning with this repository
 
 ## What is Node.js?
 
