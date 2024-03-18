@@ -2,6 +2,20 @@
 
 Node.js will be too easy learning with this repository
 
+## Course repository organization
+
+This repository is organized into modules, each covering different aspects of Node.js development. Within each module, there are individual lessons that delve into specific topics or concepts related to Node.js. Each lesson is accompanied by its own set of files, which may include code examples, explanations, exercises, quizzes, or other relevant material.
+
+## Install necessary dependecies
+
+```npm install ```
+
+## Start server
+
+To start the server for a particular lesson, you can use the npm start command followed by the path to the app.js file within the desired lesson directory. This ensures that the server defined in that specific app.js file is launched. Exemple the first lesson which it's used a app.js in "Express.js introduction"
+
+```npm start module_2_express/lesson_1_express_introduction/app.js```
+
 ## What is Node.js?
 
 Node.js is an open-source, cross-platform, JavaScript runtime environment that executes JavaScript code outside a web browser. Node.js lets developers use JavaScript to write command line tools and for server-side scripting—running scripts server-side to produce dynamic web page content before the page is sent to the user's web browser.
