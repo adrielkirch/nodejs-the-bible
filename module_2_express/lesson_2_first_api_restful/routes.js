@@ -6,7 +6,7 @@ const { StatusCodes } = require('http-status-codes');
 let items = [];
 
 /**
- * Retrieve an item by ID.
+ * Retrieve an item by _id.
  * @route GET /items/{id}
  * @param {number} id.path.required - The ID of the item.
  * @returns {Object} The item object.
@@ -14,7 +14,7 @@ let items = [];
  */
 router.get('/:id', async (req, res) => {
     try {
-        // Logic to retrieve item by ID
+        // Logic to retrieve item by _id
         const itemId = req.params.id;
         const item = items.find(item => item.id === parseInt(itemId));
         if (!item) {
@@ -93,7 +93,7 @@ router.put('/:id', async (req, res) => {
 });
 
 /**
- * Delete an item by ID.
+ * Delete an item by _id.
  * @route DELETE /items/{id}
  * @param {number} id.path.required - The ID of the item to delete.
  * @returns {void}

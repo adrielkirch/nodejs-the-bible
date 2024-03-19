@@ -52,7 +52,6 @@ async function getById(req, res) {
 
 async function deleteById(req, res) {
   try {
-    console.log(req.user)
     await userService.deleteById(req.user);
     res.status(StatusCodes.NO_CONTENT).json({});
   } catch (error) {
@@ -62,10 +61,29 @@ async function deleteById(req, res) {
       .json({ error: error.message });
   }
 }
+async function update(req, res) {
+  try {
+    const { name } = req.body;
+
+    const payload = {
+      _id:req.user,
+      name:name
+    }
+    await userService.update(payload);
+    res.status(StatusCodes.OK).json({});
+  } catch (error) {
+    console.error(error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: error.message });
+  }
+}
+
 
 module.exports = {
   signup,
   login,
   getById,
   deleteById,
+  update
 };

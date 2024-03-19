@@ -39,12 +39,20 @@ async function deleteById(id) {
     throw new Error("Invalid Id");
   }
   await userRepository.deleteById(id);
-  
+}
+
+async function update(newUser) {
+  const exists = await userRepository.getById(newUser._id);
+  if (!exists) {
+    throw new Error("Invalid Id");
+  }
+  await userRepository.update(newUser);
 }
 
 module.exports = {
   signup,
   login,
   getById,
-  deleteById
+  deleteById,
+  update
 };

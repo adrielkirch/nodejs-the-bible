@@ -130,4 +130,35 @@ router.get("/", [authMiddleware], userController.getById);
  */
 router.delete("/", [authMiddleware], userController.deleteById);
 
+/**
+ * @swagger
+ * /user:
+ *   put:
+ *     summary: Update user account
+ *     tags: [User]
+ *     security:
+ *       - BearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: string
+ *                 description: The ID of the user to update
+ *               data:
+ *                 type: object
+ *                 description: The updated user data
+ *     responses:
+ *       '200':
+ *         description: OK
+ *       '401':
+ *         description: Unauthorized
+ *       '500':
+ *         description: Internal Server Error
+ */
+router.put("/", [authMiddleware,check("name").isString()], userController.update);
+
 module.exports = router;

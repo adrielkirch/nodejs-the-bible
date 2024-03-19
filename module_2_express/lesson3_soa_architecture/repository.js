@@ -42,10 +42,18 @@ async function getByFieldValue(field, value) {
   return user;
 }
 
+async function update(user) {
+  const db = await fileUtil.readFileAsync(dbPath);
+  const index = db.users.findIndex((u) => u._id === user._id);
+  db.users[index].name = user.name;
+  await fileUtil.writeFileAsync(dbPath, db);
+}
+
 module.exports = {
   signup,
   login,
   getById,
   deleteById,
   getByFieldValue,
+  update,
 };

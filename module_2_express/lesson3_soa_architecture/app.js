@@ -4,8 +4,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const userRoute = require("./route");
 const swaggerUI = require("swagger-ui-express");
-const {PORT} = require("./config");
-
+const swaggerSpec = require("./swagger");
+const { PORT } = require("./config");
 
 /**
  * Lesson Objective: Implementing a Service-Oriented Architecture (SOA), layered architecture with a fake JSON database to simulate authentication.
@@ -26,11 +26,12 @@ async function startServer() {
   //Set up user Route
   app.use("/user", userRoute);
 
-  const swaggerSpec = require("./swagger");
+
   app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
   await app.listen(PORT);
   console.log(`Server is running on port ${PORT}`);
+  console.log(`API documentation: http://localhost:${PORT}/api-docs`);
 }
 
 startServer();
