@@ -1,19 +1,21 @@
-const swaggerOptions = {
-  swaggerDefinition: {
-    openapi: "3.0.0",
-    info: {
-      title: "API Documentation",
-      version: "1.0.0",
-      description: "Documentation for the API endpoints",
-    },
-    servers: [
-      {
-        url: "http://localhost:3000",
-        description: "Development server",
-      },
-    ],
+const swaggerJSDoc = require("swagger-jsdoc");
+const routePath = __dirname + '/route.js'
+const swaggerDefinition = {
+  openapi: "3.0.0",
+  info: {
+    title: "My API",
+    version: "1.0.0",
+    description: "My API Description",
   },
-  apis: ["./route.js"], 
 };
 
-module.exports = swaggerOptions;
+const options = {
+  swaggerDefinition,
+  apis: [
+    routePath
+  ],
+ 
+};
+
+const swaggerSpec = swaggerJSDoc(options);
+module.exports = swaggerSpec;

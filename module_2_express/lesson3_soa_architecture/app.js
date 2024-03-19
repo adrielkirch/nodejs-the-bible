@@ -3,8 +3,8 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const userRoute = require("./route");
 const swaggerOptions  = require("./swagger"); 
-const swaggerUi = require("swagger-ui-express");
-const swaggerJsdoc = require("swagger-jsdoc");
+const swaggerUI = require("swagger-ui-express");
+
 dotenv.config();
 
 /**
@@ -27,10 +27,9 @@ async function startServer() {
   //Set up user Route
   app.use("/user", userRoute);
 
-  // Set up Swagger documentation
-  
-  const swaggerSpec = swaggerJsdoc(swaggerOptions);
-  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+  const swaggerSpec = require("./swagger");
+  app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
   await app.listen(port);
   console.log(`Server is running on port ${port}`);

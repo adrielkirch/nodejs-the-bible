@@ -7,16 +7,24 @@ const authMiddleware = require("./middleware");
 /**
  * @swagger
  * tags:
- *   name: User
- *   description: User and Authentication endpoints
+ *   name: Authentication
+ *   description: Authentication endpoints
  */
 
 /**
  * @swagger
- * /signup:
+ * tags:
+ *   name: User
+ *   description: User endpoints
+ */
+
+/**
+ * @swagger
+ * /user/signup:
  *   post:
- *     summary: Register a new user
+ *     summary: Sign up for a new account
  *     tags: [Authentication]
+ *     description: Register a new user account.
  *     requestBody:
  *       required: true
  *       content:
@@ -26,32 +34,36 @@ const authMiddleware = require("./middleware");
  *             properties:
  *               email:
  *                 type: string
+ *                 format: email
+ *                 description: Email address of the user.
  *               name:
  *                 type: string
+ *                 description: Name of the user.
  *               password:
  *                 type: string
+ *                 format: password
  *                 minLength: 8
+ *                 description: Password for the account (minimum 8 characters).
  *     responses:
- *       '201':
- *         description: Created
+ *       '200':
+ *         description: User signed up successfully.
  *       '400':
- *         description: Bad Request
- *       '500':
- *         description: Internal Server Error
+ *         description: Bad request. Invalid input data.
  */
-router.post(
-  "/signup",
-  [
-    check("email").isEmail().normalizeEmail(),
-    check("name").isString(),
-    check("password").isString().isLength({ min: 8 }),
-  ],
-  userController.signup
-);
 
+router.post(
+    "/signup",
+    [
+      check("email").isEmail().normalizeEmail(),
+      check("name").isString(),
+      check("password").isString().isLength({ min: 8 }),
+    ],
+    userController.signup
+  );
+  
 /**
  * @swagger
- * /login:
+ * /user/login:
  *   post:
  *     summary: Log in to the application
  *     tags: [Authentication]
@@ -84,10 +96,10 @@ router.post(
 
 /**
  * @swagger
- * /:
+ * /user:
  *   get:
  *     summary: Get user details
- *     tags: [Authentication]
+ *     tags: [User]
  *     security:
  *       - BearerAuth: []
  *     responses:
@@ -102,10 +114,10 @@ router.get("/", [authMiddleware], userController.getById);
 
 /**
  * @swagger
- * /:
+ * /user:
  *   delete:
  *     summary: Delete user account
- *     tags: [Authentication]
+ *     tags: [User]
  *     security:
  *       - BearerAuth: []
  *     responses:
