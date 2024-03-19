@@ -1,0 +1,10 @@
+{
+  "users": [
+    {
+      "_id": "d44e2004-e2e6-4755-8c39-7a132e55201c",
+      "email": "adriel2@test.com",
+      "name": "adriel",
+      "password": "afde1f8f38b1ad1494db0278737b814c62b66ea4a7279687046b50ed2277c972c5ca4f438efd08c4c9890c9d30e9b42536ca08913583d2be7de17275162f693b"
+    }
+  ]
+}
