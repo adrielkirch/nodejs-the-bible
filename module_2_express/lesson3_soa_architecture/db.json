@@ -5,6 +5,12 @@
       "email": "adriel2@test.com",
       "name": "adriel",
       "password": "afde1f8f38b1ad1494db0278737b814c62b66ea4a7279687046b50ed2277c972c5ca4f438efd08c4c9890c9d30e9b42536ca08913583d2be7de17275162f693b"
+    },
+    {
+      "_id": "389adfc9-45b3-4502-a201-98bbe50537d3",
+      "email": "user@example.com",
+      "name": "user",
+      "password": "dc7d44c0f06c41b1199e264056c6901b960598a71c760c7ea1eee6f9a81bb1a6e0f91440f1271ab5f269f2aed718366a4ee4b67d2662075ea3a6291a6e22ba14"
     }
   ]
 }
