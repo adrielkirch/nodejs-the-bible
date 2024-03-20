@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 
-const {JWT_SECRET_KEY} = require("./config")
+const { JWT_SECRET_KEY } = require("./config");
 const { v4: uuidv4 } = require("uuid");
 
 function generateUUID() {

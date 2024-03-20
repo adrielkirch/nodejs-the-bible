@@ -157,3 +157,30 @@ console.table(sortedCarsByPriceAsc);
 console.log("\nSort by cars prices descending");
 const sortedCarsByPriceDesc = cars.sort((a, b) => b.price - a.price);
 console.table(sortedCarsByPriceDesc);
+
+
+// Creating an array of arrays (matrix)
+console.log("\nArray of arrays Matrix:")
+const arrayOfArrays = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+];
+console.table(arrayOfArrays)
+
+// Accessing elements in the array of arrays
+console.log("Element at row 1, column 2:", arrayOfArrays[0][1]); // Output: 2
+console.log("Element at row 2, column 3:", arrayOfArrays[1][2]); // Output: 6
+console.log("Element at row 3, column 1:", arrayOfArrays[2][0]); // Output: 7
+
+// Modifying elements in the array of arrays
+arrayOfArrays[1][1] = 10;
+console.log("Modified element at row 2, column 2:", arrayOfArrays[1][1]); // Output: 10
+
+// Iterating over the array of arrays
+console.log("Iterating over the array of arrays:");
+for (let row of arrayOfArrays) {
+  for (let element of row) {
+    console.log(element);
+  }
+}

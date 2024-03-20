@@ -66,9 +66,9 @@ async function update(req, res) {
     const { name } = req.body;
 
     const payload = {
-      _id:req.user,
-      name:name
-    }
+      _id: req.user,
+      name: name,
+    };
     await userService.update(payload);
     res.status(StatusCodes.OK).json({});
   } catch (error) {
@@ -79,11 +79,10 @@ async function update(req, res) {
   }
 }
 
-
 module.exports = {
   signup,
   login,
   getById,
   deleteById,
-  update
+  update,
 };

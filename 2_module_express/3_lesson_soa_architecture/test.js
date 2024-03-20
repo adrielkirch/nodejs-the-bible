@@ -132,7 +132,7 @@ describe("Controllers", () => {
 
   describe("update", () => {
     it("should update an user name by _id", async () => {
-      const req = { body: { user: "user_id", name: "new_name" } }; 
+      const req = { body: { user: "user_id", name: "new_name" } };
       const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
 
       // Creating a stub to replace the userService.update function during testing

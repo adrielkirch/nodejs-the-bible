@@ -54,5 +54,5 @@ module.exports = {
   login,
   getById,
   deleteById,
-  update
+  update,
 };

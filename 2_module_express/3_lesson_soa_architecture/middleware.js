@@ -11,7 +11,7 @@ function authMiddleware(req, res, next) {
       .json({ message: "No token, authorization denied" });
   }
 
-  const token = authHeader.split(" ")[1]; 
+  const token = authHeader.split(" ")[1];
 
   try {
     req.user = securityUtil.decodedJwt(token);
@@ -20,6 +20,5 @@ function authMiddleware(req, res, next) {
     return res.status(StatusCodes.UNAUTHORIZED).send("Token is not valid");
   }
 }
-
 
 module.exports = authMiddleware;
