@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Products",
-    "description": "Documentation from products api",
+    "title": "Service Oriented Architecture",
+    "description": "Implementing a Service-Oriented Architecture (SOA), layered architecture with a fake JSON database to simulate authentication. With all necessary processes to guarantee security, organization, readability, maintainability and test-driven development.",
     "version": "1.0.0"
   },
   "basePath": "/",
