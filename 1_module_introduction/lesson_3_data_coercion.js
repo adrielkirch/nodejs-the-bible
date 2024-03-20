@@ -21,7 +21,14 @@ console.assert(2 - true === 1, 'Should be 1');
 
 // Example 8: Chained comparison
 console.assert(3 > 2 >= 1 === true, 'Should be true');
-
+/**
+ * The expression 3 > 2 returns true, because 3 is greater than 2.
+ * Then, the expression true > 1 is evaluated. Here's the issue: JavaScript tries to convert true into a number, which is converted to 1.
+ * Therefore, you're essentially doing 1 > 1, which is false.
+ * 
+ * Thus, the expression 3 > 2 > 1 is evaluated as true > 1, which is false.
+ */
+console.assert(3 > 2 > 1 === false, 'Should be false');
 // Example 9: Loose equality comparison
 console.assert('1' == 1, "'1' == 1 - is equivalent");
 
