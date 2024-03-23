@@ -1,7 +1,12 @@
 /**
- * Sets in JavaScript are data structures that allow storing unique values of any data type.
- * They provide efficient methods for adding, removing, and checking for the existence of elements.
- * Sets do not allow duplicate values, making them suitable for use cases where uniqueness is important.
+ * Sets in JavaScript are powerful data structures crafted for managing collections of unique values.
+ * They excel in scenarios where you need to handle a group of elements without any duplicates.
+ * 
+ * Use sets when:
+ * - You want to store a collection of elements where uniqueness is crucial, ensuring each value appears only once.
+ * - You need efficient methods for adding new elements, removing existing ones, and checking for the presence of specific values.
+ * - The order of elements in the collection is not important, as sets do not guarantee any specific order.
+ * - You want to simplify tasks like finding unique items in a dataset or eliminating duplicate entries from a list.
  */
 const assert = require('assert');
 
@@ -23,7 +28,7 @@ mySet
   .add(1)
   .add({ text: 'two' })
   .add(() => 'hello world!');
-  
+
 assert.deepStrictEqual(mySet.size, 5);
 console.log('mySet', mySet, '\n');
 console.log('mySet.has(1)', mySet.has(1), '\n');
