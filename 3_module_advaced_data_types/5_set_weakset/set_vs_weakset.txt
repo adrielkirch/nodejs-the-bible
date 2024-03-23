@@ -1,6 +1,6 @@
 Set vs. WeakSet: Understanding the Differences
 
-Sets and WeakSets are both data structures in JavaScript used for storing collections of unique values. While they share some similarities, they also have key differences that make each suitable for different scenarios.
+Sets and WeakSets are both data structures in JavaScript used for storing list of unique values. While they share some similarities, they also have key differences that make each suitable for different scenarios.
 
 Set:
 
@@ -19,6 +19,7 @@ Memory Considerations: WeakSets can help prevent memory leaks by allowing object
 Considerations:
 
 Use Set when:
+    When you need a list with only unique items
     You need a data structure with keys of various data types.
     Strong references to keys are desired, ensuring they are not garbage collected as long as the set exists.
     You require the ability to iterate over the values of the set.

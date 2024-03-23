@@ -1,10 +1,19 @@
 /**
- * WeakSets in JavaScript are data structures similar to Sets, but with some key differences.
- * They allow storing a collection of unique objects only.
- * WeakSets hold weak references to the objects, allowing them to be garbage collected if there are no other references to those objects.
- * WeakSets do not support iteration or enumeration of their elements.
- * WeakSets are suitable for scenarios where temporary associations between objects are needed, and memory management is important.
+ * ### WeakSet
+ *
+ * Similar to WeakMap.
+ * - Not enumerable (iterable);
+ * - Only works with keys as references;
+ * - Has only simple methods.
  */
+
+const user = { id: 123 };
+const user2 = { id: 321 };
+
+const weakSet = new WeakSet([user]);
+weakSet.add(user2);
+weakSet.delete(user2);
+weakSet.has(user2);
 const assert = require('assert');
 
 const myWeakSet = new WeakSet();

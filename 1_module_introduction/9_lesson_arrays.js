@@ -35,7 +35,6 @@ console.log("Size =>", listSize);
 indexof = numbersCopy.length;
 console.log("Size =>", listSize);
 
-
 // Push, add a item element in array (last index), returns the new list length
 let newLength = numbers.push(4);
 console.assert(numbers, [1, 2, 3, 4]);
@@ -62,35 +61,46 @@ console.assert(newLength, 3);
  */
 numbers = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
 
-//Exemple 1, splice(), remove the only number 11
+// Example 1: Using indexOf()
+const indexUsingIndexOf = numbers.indexOf(11);
+console.log("Using indexOf(): Index of 11 in numbers array is", indexUsingIndexOf);
+
+// Example 2: Using includes(), true or false if element exists in the array
+const isPresent = numbers.includes(11);
+console.log("Using includes(): Is 11 present in numbers array?", isPresent);
+
+// Exemple 3, splice(), remove the only number 11
 let removedItems = numbers.splice(1, 1);
 console.assert(numbers, [10, 12, 13, 14, 15, 16, 17, 18, 19]);
 console.assert(removedItems, [11]);
 
-//Exemple 2, splice(), remove the 2 last numbers
+// Exemple 4, splice(), remove the 2 last numbers
 removedItems = numbers.splice(-2);
 console.assert(numbers, [10, 12, 13, 14, 15, 16, 17]);
 console.assert(removedItems, [18, 19]);
 
-//Exemple 3, splice(), remove the 2 first numbers
+// Exemple 5, splice(), remove the 2 first numbers
 removedItems = numbers.splice(2);
 console.assert(numbers, [13, 14, 15, 16, 17]);
 console.assert(removedItems, [10, 12]);
 
-//Exemple 3, splice(), remove the two elements after an index
+// Exemple 6, splice(), remove the two elements after an index
 removedItems = numbers.splice(1, 2);
 console.assert(numbers, [13, 14, 17]);
 console.assert(removedItems, [15, 16]);
 
 // Slice is used to create a new array containing a portion of the original array, starting from an index and optionally ending at another index (exclusive).
-numbers = [1,2,3,4,5,6]
-console.log("\nNumbers before slice =>",numbers)
-let sliced = numbers.slice(-2)
-console.log("sliced only 2 last numbers =>",sliced)
-sliced = numbers.slice(2)
-console.log("sliced only 2 first numbers  =>",sliced)
-sliced = numbers.slice(1,-2)
-console.log("sliced staring in index 1 and finishing in 2nd last index  =>",sliced)
+numbers = [1, 2, 3, 4, 5, 6];
+console.log("\nNumbers before slice =>", numbers);
+let sliced = numbers.slice(-2);
+console.log("sliced only 2 last numbers =>", sliced);
+sliced = numbers.slice(2);
+console.log("sliced only 2 first numbers  =>", sliced);
+sliced = numbers.slice(1, -2);
+console.log(
+  "sliced staring in index 1 and finishing in 2nd last index  =>",
+  sliced
+);
 
 //Creating a list of objecting, in this exemple cars
 const cars = [
@@ -122,32 +132,32 @@ console.table(cars);
 
 //The fn forEach() is used to iterate over all elements in the list
 let sum = 0;
-cars.forEach(car => {
-  sum += car.price
+cars.forEach((car) => {
+  sum += car.price;
 });
 const average = sum / cars.length;
-console.log("\naverage ($) =>",average)
+console.log("\naverage ($) =>", average);
 
 //The fn filter(), creates a new array filled with elements given a condition
 console.log("\nUsing filter to find all Toyotas:");
-const toyotaCars = cars.filter(car => car.brand === "Toyota");
+const toyotaCars = cars.filter((car) => car.brand === "Toyota");
 console.table(toyotaCars);
 
 //The fn find(), Returns the first element in the array that satisfies the provided testing function.
 console.log("\nUsing find to find the first Toyota car:");
-const toyotaCar = cars.find(car => car.brand === "Toyota");
+const toyotaCar = cars.find((car) => car.brand === "Toyota");
 console.table(toyotaCar);
 
 // The fn map() creates a new array from calling a function for every array elemen
 console.log("\nUsing map to create an new array of car models:");
-const carModels = cars.map(car => car.model);
+const carModels = cars.map((car) => car.model);
 console.log(carModels);
 
 // The fn reduce() method returns a single value: the function's accumulated result.
 sum = cars.reduce((accumulator, car) => {
-    return accumulator + car.price;
+  return accumulator + car.price;
 }, 0);
-console.log("Total price ($) =>",sum)
+console.log("Total price ($) =>", sum);
 
 //The fn sort() sorts the elements of an array by an specif rule
 console.log("\nSort by cars prices ascending");
@@ -158,15 +168,14 @@ console.log("\nSort by cars prices descending");
 const sortedCarsByPriceDesc = cars.sort((a, b) => b.price - a.price);
 console.table(sortedCarsByPriceDesc);
 
-
 // Creating an array of arrays (matrix)
-console.log("\nArray of arrays Matrix:")
+console.log("\nArray of arrays Matrix:");
 const arrayOfArrays = [
   [1, 2, 3],
   [4, 5, 6],
-  [7, 8, 9]
+  [7, 8, 9],
 ];
-console.table(arrayOfArrays)
+console.table(arrayOfArrays);
 
 // Accessing elements in the array of arrays
 console.log("Element at row 1, column 2:", arrayOfArrays[0][1]); // Output: 2
