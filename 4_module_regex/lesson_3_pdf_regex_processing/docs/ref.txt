@@ -1,0 +1,4 @@
+# pegar o texto do console.log e retornar em um arquivo.
+npm start | tee text.txt
+
+https://lirantal.medium.com/node-js-pitfalls-how-a-regex-can-bring-your-system-down-cbf1dc6c4e02
