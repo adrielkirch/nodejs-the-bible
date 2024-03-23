@@ -3,8 +3,6 @@
 /**
  * In this example, we've created a task scheduler using JavaScript timing mechanisms to simulate the execution of asynchronous tasks.
  */
-
-
 // Sample tasks array
 const tasks = [
   { name: "task1", created: Date.now(), schedule: 8000, done: false },

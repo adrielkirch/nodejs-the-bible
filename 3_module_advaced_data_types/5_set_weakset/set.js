@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Sets in JavaScript are powerful data structures, a crafted for managing list of unique values.
  * They excel in scenarios where you need to handle a group of elements without any duplicates.
