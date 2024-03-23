@@ -1,6 +1,6 @@
 /**
  * Loops in JavaScript are used to execute a block of code repeatedly until a specified condition is met.
- * There are several types of loops commonly used in JavaScript: while loop, for loop, and for...of loop.
+ * There are several types of loops commonly used in JavaScript: while loop, for loop, for...of loop, and do...while loop.
  *
  * while loop: The while loop executes a block of code as long as a specified condition evaluates to true.
  * It continuously checks the condition before executing the block of code.
@@ -11,6 +11,8 @@
  *
  * for...of loop: The for...of loop is used to iterate over iterable objects such as arrays, strings, maps, sets, etc.
  * It provides a more concise syntax for iterating over elements compared to traditional for loops.
+ *
+ * do...while loop: The do...while loop is similar to the while loop, except that it will execute the block of code once before checking the condition.
  */
 
 // Example demonstrating for loop to print odd numbers from 0 to 10
@@ -55,3 +57,11 @@ while (fib1 + fib2 <= 100) {
   fib1 = fib2;
   fib2 = nextFib;
 }
+
+// Example demonstrating do...while loop to print even numbers from 0 to 10
+console.log("\n odd numbers from 0 to 10:");
+let evenNum = 1;
+do {
+  console.log(evenNum);
+  evenNum += 2;
+} while (evenNum <= 10);
