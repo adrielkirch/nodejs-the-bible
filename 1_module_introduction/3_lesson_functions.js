@@ -39,7 +39,7 @@ function calculateMedian(numbers) {
 }
 
 /**
- * Calculates the range of an array of numbers. 
+ * Calculates the range of an array of numbers.
  * @param {number[]} numbers - An array of numbers.
  * @returns {number} The range.
  */
@@ -86,23 +86,26 @@ const calculateStandardDeviation = (numbers) => {
   const variance = squaredDifferencesSum / numbers.length;
   // Calculate the standard deviation
   return Math.sqrt(variance);
-}
+};
 
-// Example usage
-console.log("\nDirect invoke the statistics functions:\n")
-const numbers = [1, 2, 3, 4, 5, 5, 6, 6, 6, 7, 8, 8, 8, 8];
-const average = calculateAverage(numbers);
-const median = calculateMedian(numbers);
-const mode = calculateMode(numbers);
-const range = calculateRange(numbers);
-const standardDeviation = calculateStandardDeviation(numbers);
+// Example usage using an Immediately Invoked Lambda Function Expression
+(() => {
+  console.log("\nDirect invoke the statistics functions:\n");
+  const numbers = [1, 2, 3, 4, 5, 5, 6, 6, 6, 7, 8, 8, 8, 8];
+  const average = calculateAverage(numbers);
+  const median = calculateMedian(numbers);
+  const mode = calculateMode(numbers);
+  const range = calculateRange(numbers);
+  const standardDeviation = calculateStandardDeviation(numbers);
 
-console.log("Numbers:", numbers);
-console.log("Average:", average);
-console.log("Median:", median);
-console.log("Mode:", mode);
-console.log("Range:", range);
-console.log("Standard Deviation:", standardDeviation);
+  console.log("Numbers:", numbers);
+  console.log("Average:", average);
+  console.log("Median:", median);
+  console.log("Mode:", mode);
+  console.log("Range:", range);
+  console.log("Standard Deviation:", standardDeviation);
+})();
+
 
 /**
  * Comparing apply() and call() methods:
@@ -122,7 +125,6 @@ console.log("Standard Deviation:", standardDeviation);
  * In this example, resultApply and resultCall would both contain the result of adding x and y, but they use different methods to pass arguments to the add() function.
  */
 
-
 // Using apply() method
 const arithmeticProgression = (initial, length, increment) => {
   const progression = [];
@@ -137,7 +139,6 @@ const arithmeticProgression = (initial, length, increment) => {
 
   return progression;
 };
-
 
 // Using apply() method
 console.log("\nApply arithmetic progression functions:\n");

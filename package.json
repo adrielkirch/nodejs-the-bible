@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon",
-    "test": "mocha"
-    
+    "test": "npx mocha -w --parallel"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +16,8 @@
     "express-validator": "^7.0.1",
     "http-status-codes": "^2.3.0",
     "jsonwebtoken": "^9.0.2",
+    "pdf-parse": "^1.1.1",
+    "safe-regex": "^2.1.1",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
     "uuid": "^9.0.1"
