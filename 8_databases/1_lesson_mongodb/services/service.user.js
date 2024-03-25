@@ -1,5 +1,5 @@
-const userRepository = require("./repository");
-const securityUtil = require("./securityUtil");
+const userRepository = require("../repositories/repository.user");
+const securityUtil = require("../utils/util.security");
 
 async function signup(email, name, password) {
   const exists = await userRepository.getByFieldValue("email", email);
@@ -17,11 +17,14 @@ async function login(email, password) {
   if (!user) {
     throw new Error("Invalid email or password.");
   }
-
+  user = user.toObject();
   const token = securityUtil.generateJwt(user._id.toString());
   user.token = token;
   user = securityUtil.removeSensitiveProperty(user, "password");
-  return user;
+  return {
+    _id: user._id,
+    token: token
+  };
 }
 
 async function getById(id) {
@@ -29,6 +32,7 @@ async function getById(id) {
   if (!user) {
     throw new Error("Invalid Id");
   }
+  user = user.toObject();
   user = securityUtil.removeSensitiveProperty(user, "password");
   return user;
 }

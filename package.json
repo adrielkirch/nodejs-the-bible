@@ -20,6 +20,7 @@
     "inquirer": "^9.2.16",
     "jsonwebtoken": "^9.0.2",
     "moment": "^2.30.1",
+    "mongoose": "^8.2.3",
     "pdf-parse": "^1.1.1",
     "safe-regex": "^2.1.1",
     "socket.io": "^4.7.5",
