@@ -1,151 +1,150 @@
 const assert = require("assert");
 const { StatusCodes } = require("http-status-codes");
 const sinon = require("sinon");
-const userService = require("./services/service.user");
-const { signup, login, getById, deleteById, update } = require("./controllers/controller.user");
-
-/**
- * Test definitions
- *
- * Mock: A mock is an object that mimics the behavior of a real object or system.
- * It allows you to simulate the behavior of real objects in a controlled way
- * and is often used in testing to replace real dependencies with predictable
- * behavior for testing purposes.
- *
- * Stub: A stub is a function or object that replaces a real component or dependency in a test.
- * It allows you to control the behavior of the replaced component and define specific return values
- * or actions to be taken when the replaced function or method is called.
- * Stubs are commonly used in testing to isolate the code under test from its dependencies and
- * to create predictable test scenarios.
- *
- * Spies: A spy is a function or object that records information about function calls made during the test.
- * It allows you to monitor how functions are used, including how many times they are called, with which
- * arguments, and what values they return. Spies are useful for verifying that certain functions are
- * called or for inspecting the behavior of functions in the code under test.
- */
+const placeService = require("./services/service.place");
+const {
+  addPlace,
+  updatePlace,
+  deletePlace,
+  getPlaceById,
+} = require("./controllers/controller.place");
 
 describe("Controllers", () => {
-  describe("signup", () => {
-    it("should return a new user on successful signup", async () => {
+  describe("addPlace", () => {
+    it("should return a new place on successful addition", async () => {
       const req = {
         body: {
-          email: "test@example.com",
-          name: "Test User",
-          password: "password",
+          name: "Test Place",
+          latitude: 40.7128,
+          longitude: -74.006,
         },
       };
-      const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
-
-      // Mocking the behavior of the userService.signup function for testing purposes
-      const fakeUser = {
-        id: 123,
-        email: "test@example.com",
-        name: "Test User",
+      const res = {
+        status: sinon.stub().returnsThis(),
+        json: sinon.stub(),
       };
 
-      // Creating a stub to replace the userService.signup function during testing
-      const signupStub = sinon.stub(userService, "signup").resolves(fakeUser);
+      // Mocking the behavior of the placeService.addPlace function for testing purposes
+      const fakePlace = {
+        id: "123",
+        name: "Test Place",
+        latitude: 40.7128,
+        longitude: -74.006,
+      };
+      const addPlaceStub = sinon
+        .stub(placeService, "addPlace")
+        .resolves(fakePlace);
 
       // Call the function under test
-      await signup(req, res);
+      await addPlace(req, res);
 
       // Assert the behavior
       assert(res.status.calledOnceWith(StatusCodes.CREATED));
-      assert(res.json.calledOnceWith(fakeUser));
+      assert(res.json.calledOnceWith(fakePlace));
 
       // Restore the original function to avoid affecting other tests
-      signupStub.restore();
+      addPlaceStub.restore();
     });
   });
 
-  describe("login", () => {
-    it("should return an user on successful login", async () => {
-      const req = { body: { email: "test@example.com", password: "password" } };
-      const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
-
-      // Mocking the behavior of the userService.login function for testing purposes
-      const fakeUser = {
-        id: 123,
-        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+  describe("getPlaceById", () => {
+    it("should return a place by id", async () => {
+      const req = {
+        params: {
+          id: "123",
+        },
+      };
+      const res = {
+        status: sinon.stub().returnsThis(),
+        json: sinon.stub(),
       };
 
-      // Creating a stub to replace the userService.login function during testing
-      const loginStub = sinon.stub(userService, "login").resolves(fakeUser);
+      // Mocking the behavior of the placeService.getPlaceById function for testing purposes
+      const fakePlace = {
+        id: "123",
+        name: "Test Place",
+        latitude: 40.7128,
+        longitude: -74.006,
+      };
+      const getPlaceByIdStub = sinon
+        .stub(placeService, "getPlaceById")
+        .resolves(fakePlace);
 
       // Call the function under test
-      await login(req, res);
+      await getPlaceById(req, res);
 
       // Assert the behavior
       assert(res.status.calledOnceWith(StatusCodes.OK));
-      assert(res.json.calledOnceWith(fakeUser));
+      assert(res.json.calledOnceWith(fakePlace));
 
       // Restore the original function to avoid affecting other tests
-      loginStub.restore();
+      getPlaceByIdStub.restore();
     });
   });
 
-  describe("getById", () => {
-    it("should return an user by _id", async () => {
-      const req = { user: "user_id" };
-      const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
-
-      // Creating a stub to replace the userService.getById function during testing
-      const fakeUser = {
-        id: "user_id",
-        email: "test@example.com",
-        name: "Test User",
+  describe("getPlaceById", () => {
+    it("should update a place by id", async () => {
+      const req = {
+        params: {
+          id: "123",
+        },
+        body: {
+          name: "Updated Place",
+          latitude: 45.6789,
+          longitude: -75.1234,
+        },
       };
-      const getByIdStub = sinon.stub(userService, "getById").resolves(fakeUser);
+      const res = {
+        status: sinon.stub().returnsThis(),
+        json: sinon.stub(),
+      };
+
+      // Mocking the behavior of the placeService.updatePlace function for testing purposes
+      const updatedPlace = {
+        id: "123",
+        name: "Updated Place",
+        latitude: 45.6789,
+        longitude: -75.1234,
+      };
+      const updatePlaceStub = sinon
+        .stub(placeService, "updatePlace")
+        .resolves(updatedPlace);
 
       // Call the function under test
-      await getById(req, res);
+      await updatePlace(req, res);
 
       // Assert the behavior
       assert(res.status.calledOnceWith(StatusCodes.OK));
-      assert(res.json.calledOnceWith(fakeUser));
+      assert(res.json.calledOnceWith(updatedPlace));
 
-      // Restoring the original function to avoid affecting other tests
-      getByIdStub.restore();
+      updatePlaceStub.restore();
     });
   });
 
-  describe("deleteById", () => {
-    it("should delete an user by _id", async () => {
-      const req = { user: "user_id" };
-      const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
+  describe("deletePlace", () => {
+    it("should delete a place by id", async () => {
+      const req = {
+        params: {
+          id: "123",
+        },
+      };
+      const res = {
+        status: sinon.stub().returnsThis(),
+        json: sinon.stub(),
+      };
 
-      // Creating a stub to replace the userService.deleteById function during testing
-      const deleteByIdStub = sinon.stub(userService, "deleteById");
+      // Mocking the behavior of the placeService.deletePlace function for testing purposes
+      const deletePlaceStub = sinon.stub(placeService, "deletePlace");
 
       // Call the function under test
-      await deleteById(req, res);
+      await deletePlace(req, res);
 
       // Assert the behavior
       assert(res.status.calledOnceWith(StatusCodes.NO_CONTENT));
       assert(res.json.calledOnce);
 
-      // Restoring the original function to avoid affecting other tests
-      deleteByIdStub.restore();
-    });
-  });
-
-  describe("update", () => {
-    it("should update an user name by _id", async () => {
-      const req = { body: { user: "user_id", name: "new_name" } };
-      const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
-
-      // Creating a stub to replace the userService.update function during testing
-      const updateStub = sinon.stub(userService, "update").resolves(true); // Stub resolves with true for success
-
-      // Call the function under test
-      await update(req, res);
-
-      // Assert the behavior
-      assert(res.status.calledOnceWith(StatusCodes.OK));
-      assert(res.json.calledOnce);
-
-      // Restoring the original function to avoid affecting other tests
-      updateStub.restore();
+      // Restore the original function to avoid affecting other tests
+      deletePlaceStub.restore();
     });
   });
 });

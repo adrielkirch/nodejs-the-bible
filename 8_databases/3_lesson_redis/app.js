@@ -4,7 +4,7 @@ dotenv.config();
 const redisClient = require('./db/db.redis');
 const express = require("express");
 const bodyParser = require("body-parser");
-const userRoute = require("./routes/route.user");
+const placeRoute = require("./routes/route.place");
 const swaggerUI = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 const { PORT } = require("./config");
@@ -21,13 +21,12 @@ const { PORT } = require("./config");
  * @returns {Promise<void>} A Promise that resolves when the server has started successfully.
  */
 async function startServer() {
-  await redisClient.connect()
+ 
   const app = express();
 
   app.use(bodyParser.json());
 
-  //Set up user Route
-  app.use("/user", userRoute);
+  app.use("/place", placeRoute);
 
   app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
