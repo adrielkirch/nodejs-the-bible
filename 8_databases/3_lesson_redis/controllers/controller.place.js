@@ -33,7 +33,35 @@ async function deletePlace(req, res) {
   }
 }
 
+async function updatePlace(req, res) {
+  try {
+    const {_id, name, latitude, longitude } = req.body;
+    await placeService.updatePlace(_id, name, latitude, longitude );
+    res.status(StatusCodes.OK).json({});
+  } catch (error) {
+    console.error(error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: error.message });
+  }
+}
+
+async function getNearbyPlaces(req, res) {
+  try {
+    const { latitude, longitude, radius } = req.query;
+    console.log(req.query)
+    const nearbyPlaces = await placeService.getNearbyPlaces(latitude, longitude, radius);
+    res.status(StatusCodes.OK).json(nearbyPlaces);
+  } catch (error) {
+    console.error(error);
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
+  }
+}
+
+
 module.exports = {
   addPlace,
   deletePlace,
+  updatePlace,
+  getNearbyPlaces
 };

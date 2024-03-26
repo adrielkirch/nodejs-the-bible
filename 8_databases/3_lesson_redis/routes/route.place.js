@@ -14,6 +14,22 @@ router.post(
   placeController.addPlace
 );
 
+router.put(
+  "/",
+  [
+    check("_id").isString(),
+    check("name").isString(),
+    check("latitude").isNumeric(),
+    check("longitude").isNumeric(),
+  ],
+  placeController.updatePlace
+);
+
+router.get("/", placeController.getNearbyPlaces);
+
+
 router.delete("/:id", placeController.deletePlace);
+
+
 
 module.exports = router;

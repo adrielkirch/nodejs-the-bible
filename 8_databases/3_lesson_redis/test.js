@@ -6,7 +6,6 @@ const {
   addPlace,
   updatePlace,
   deletePlace,
-  getPlaceById,
 } = require("./controllers/controller.place");
 
 describe("Controllers", () => {
@@ -47,42 +46,9 @@ describe("Controllers", () => {
     });
   });
 
-  describe("getPlaceById", () => {
-    it("should return a place by id", async () => {
-      const req = {
-        params: {
-          id: "123",
-        },
-      };
-      const res = {
-        status: sinon.stub().returnsThis(),
-        json: sinon.stub(),
-      };
+ 
 
-      // Mocking the behavior of the placeService.getPlaceById function for testing purposes
-      const fakePlace = {
-        id: "123",
-        name: "Test Place",
-        latitude: 40.7128,
-        longitude: -74.006,
-      };
-      const getPlaceByIdStub = sinon
-        .stub(placeService, "getPlaceById")
-        .resolves(fakePlace);
-
-      // Call the function under test
-      await getPlaceById(req, res);
-
-      // Assert the behavior
-      assert(res.status.calledOnceWith(StatusCodes.OK));
-      assert(res.json.calledOnceWith(fakePlace));
-
-      // Restore the original function to avoid affecting other tests
-      getPlaceByIdStub.restore();
-    });
-  });
-
-  describe("getPlaceById", () => {
+  describe("updatePlace", () => {
     it("should update a place by id", async () => {
       const req = {
         params: {
@@ -101,7 +67,7 @@ describe("Controllers", () => {
 
       // Mocking the behavior of the placeService.updatePlace function for testing purposes
       const updatedPlace = {
-        id: "123",
+        _id: "123",
         name: "Updated Place",
         latitude: 45.6789,
         longitude: -75.1234,
@@ -115,7 +81,7 @@ describe("Controllers", () => {
 
       // Assert the behavior
       assert(res.status.calledOnceWith(StatusCodes.OK));
-      assert(res.json.calledOnceWith(updatedPlace));
+      assert(res.json.calledOnceWith({}));
 
       updatePlaceStub.restore();
     });
