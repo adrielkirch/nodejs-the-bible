@@ -23,6 +23,7 @@
     "mongoose": "^8.2.3",
     "mysql2": "^3.9.2",
     "pdf-parse": "^1.1.1",
+    "redis": "^4.6.13",
     "safe-regex": "^2.1.1",
     "socket.io": "^4.7.5",
     "socket.io-client": "^4.7.5",
