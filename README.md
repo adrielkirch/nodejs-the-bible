@@ -14,7 +14,7 @@ This repository is organized into modules, each covering different aspects of No
 
 To start the server for a particular lesson, you can use the npm start command followed by the path to the app.js file within the desired lesson directory. This ensures that the server defined in that specific app.js file is launched. Exemple the first lesson which it's used a app.js in "Express.js introduction"
 
-```npm start module_2_express/lesson_1_express_introduction/app.js```
+```npm start 1_javascript/2_module_express/1_lesson_express_introduction/app.js```
 
 ## What is Node.js?
 
