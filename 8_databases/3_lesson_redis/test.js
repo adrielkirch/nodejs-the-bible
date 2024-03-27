@@ -6,6 +6,7 @@ const {
   addPlace,
   updatePlace,
   deletePlace,
+  getNearbyPlaces,
 } = require("./controllers/controller.place");
 
 describe("Controllers", () => {
@@ -46,8 +47,6 @@ describe("Controllers", () => {
     });
   });
 
- 
-
   describe("updatePlace", () => {
     it("should update a place by id", async () => {
       const req = {
@@ -55,7 +54,6 @@ describe("Controllers", () => {
           id: "123",
         },
         body: {
-          name: "Updated Place",
           latitude: 45.6789,
           longitude: -75.1234,
         },
@@ -68,7 +66,7 @@ describe("Controllers", () => {
       // Mocking the behavior of the placeService.updatePlace function for testing purposes
       const updatedPlace = {
         _id: "123",
-        name: "Updated Place",
+
         latitude: 45.6789,
         longitude: -75.1234,
       };
@@ -111,6 +109,51 @@ describe("Controllers", () => {
 
       // Restore the original function to avoid affecting other tests
       deletePlaceStub.restore();
+    });
+  });
+
+  describe("getNearbyPlaces", () => {
+    it("should return nearby places for given latitude, longitude, and radius", async () => {
+      const req = {
+        query: {
+          latitude: 40.7128,
+          longitude: -74.006,
+          radius: 5,
+        },
+      };
+      const res = {
+        status: sinon.stub().returnsThis(),
+        json: sinon.stub(),
+      };
+
+      // Mocking the behavior of the placeService.getNearbyPlaces function for testing purposes
+      const nearbyPlaces = [
+        {
+          id: "1",
+          name: "Place 1",
+          location: ["-118.25364142656326294", "34.05223615492176492"],
+          distance: "0.1",
+        },
+        {
+          id: "2",
+          name: "Place 2",
+          location: ["-118.25364142656326294", "34.05223615492176492"],
+          distance: "0.2",
+        },
+      ];
+      const getNearbyPlacesStub = sinon
+        .stub(placeService, "getNearbyPlaces")
+        .resolves(nearbyPlaces);
+
+      // Call the function under test
+      await getNearbyPlaces(req, res);
+
+      // Assert the behavior
+      assert(res.status.calledOnceWith(StatusCodes.OK));
+      assert(res.json.calledOnceWith(nearbyPlaces));
+
+      // Restore the original function to avoid affecting other tests
+      getNearbyPlacesStub.restore();
     });
   });
 });

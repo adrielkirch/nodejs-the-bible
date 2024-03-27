@@ -1,58 +1,68 @@
-const { v4: uuidv4 } = require("uuid");
 const redisClient = require("../db/db.redis");
 
 const PLACE_KEY_PREFIX = "place:";
+const LIST = "locations"
 
-async function addPlace(name, latitude, longitude) {
-  const id = uuidv4();
-
+async function addPlace(id, latitude, longitude) {
   await redisClient.geoadd(
-    `${PLACE_KEY_PREFIX}${id}`,
+    LIST,
     longitude,
     latitude,
-    name
+    `${PLACE_KEY_PREFIX}${id}`
   );
-  return { id, name, latitude, longitude };
+  return { id, latitude, longitude };
 }
 
 async function getNearbyPlaces(latitude, longitude, radius) {
-
-  const nearbyPlaces = await redisClient.georadius(
-    `${PLACE_KEY_PREFIX}`, 
+  const nearbyPlacesWithDistances = await redisClient.georadius(
+    LIST,
     longitude,
     latitude,
     radius,
-    "km", 
-    "WITHDIST", 
-    "ASC" 
+    "km",
+    "WITHDIST",
+    "ASC"
   );
-  console.log(nearbyPlaces);
-  const formattedNearbyPlaces = nearbyPlaces.map(([placeKey, distance]) => {
-    const id = placeKey.substring(PLACE_KEY_PREFIX.length);
-    return { id, distance };
-  });
 
-  return formattedNearbyPlaces;
+  const placeKeysWithDistances = nearbyPlacesWithDistances.map(
+    ([placeKey, distance]) => {
+      return { placeKey, distance };
+    }
+  );
+
+  const placesWithLatLong = await Promise.all(
+    placeKeysWithDistances.map(async ({ placeKey, distance }) => {
+      const id = placeKey.substring(PLACE_KEY_PREFIX.length);
+      const location = await redisClient.geopos(LIST, placeKey);
+      return { id, distance, location: location[0] };
+    })
+  );
+
+  return placesWithLatLong;
 }
 async function deletePlace(id) {
   const placeKey = `${PLACE_KEY_PREFIX}${id}`;
   await redisClient.del(placeKey);
-  return true; 
+  return true;
 }
 
-async function updatePlace(id, newName, newLatitude, newLongitude) {
+async function updatePlace(id, newLatitude, newLongitude) {
   const placeKey = `${PLACE_KEY_PREFIX}${id}`;
 
   await redisClient.del(placeKey);
 
   await redisClient.geoadd(
-    `${PLACE_KEY_PREFIX}${id}`,
-    newLongitude,
-    newLatitude,
-    newName
+    LIST,
+    longitude,
+    latitude,
+    `${PLACE_KEY_PREFIX}${id}`
   );
 
-  return { id: id, name: newName, latitude: newLatitude, longitude: newLongitude };
+  return {
+    id: id,
+    latitude: newLatitude,
+    longitude: newLongitude,
+  };
 }
 
 module.exports = {
