@@ -85,5 +85,4 @@ function facadeDemo() {
   house.turnOnSystems();
   house.shutDown();
 }
-
 facadeDemo();
