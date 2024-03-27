@@ -1,0 +1,17 @@
+Socket.IO and WebSocket (often referred to as "ws") are both technologies used for real-time communication between a client and a server in web applications. 
+While they serve similar purposes, they have some key differences:
+
+    WebSocket (ws):
+        WebSocket is a communication protocol providing full-duplex communication channels over a single TCP connection.
+        It is standardized by the IETF as RFC 6455.
+        WebSocket is a lower-level protocol compared to Socket.IO, providing a basic communication channel without built-in features like automatic reconnection, multiplexing, or fallback mechanisms.
+        WebSocket is supported by most modern web browsers and can be used with various programming languages and frameworks on both the client and server sides.
+
+    Socket.IO:
+        Socket.IO is a JavaScript library that enables real-time, bidirectional, and event-based communication between web clients and servers.
+        It builds on top of WebSocket but provides additional features and fallback mechanisms to ensure compatibility with a wide range of browsers and network configurations.
+        Socket.IO automatically handles features like reconnection, multiplexing, and support for various transports (WebSocket, AJAX long polling, etc.) transparently, providing a more robust and flexible solution for real-time communication.
+        Socket.IO also provides a higher-level API compared to raw WebSocket, making it easier to work with events and data.
+
+In summary, while WebSocket is a lower-level protocol providing a basic communication channel, Socket.IO is a higher-level library built on top of WebSocket that adds additional features and abstraction to simplify real-time communication in web applications and ensure compatibility across different environments. 
+Socket.IO is often preferred for its ease of use and robustness in real-world applications.

@@ -1,0 +1,87 @@
+Lesson: Introduction to Regular Expressions (Regex)
+
+https://regexr.com/
+
+Overview:
+Regular expressions, often abbreviated as regex or regexp, are powerful tools used for pattern matching and manipulation of text. They provide a concise and flexible syntax for searching, extracting, and replacing specific patterns within strings. In this lesson, we'll explore what regular expressions are, why they are used, and delve into some of the top use cases for regex.
+
+What is a Regular Expression?
+A regular expression is a sequence of characters that forms a search pattern. It consists of literal characters (e.g., letters, numbers) and metacharacters (e.g., \d, \w, *, +) that represent patterns of text to be matched. Regex can be as simple as a single character or as complex as a combination of patterns. They are supported by most programming languages and text editors.
+
+Why Use Regular Expressions?
+Regular expressions offer several benefits:
+
+    Pattern Matching: Regex allows you to search for specific patterns within strings, making it easier to find desired information.
+
+    Text Manipulation: They enable you to extract, replace, or manipulate text based on predefined patterns, saving time and effort.
+
+    Data Validation: Regex can be used to validate input data such as email addresses, phone numbers, and dates, ensuring they match a specific format.
+
+    Data Extraction: They facilitate the extraction of relevant information from text, which can be useful for data processing and analysis.
+
+    String Parsing: Regex can parse complex strings into meaningful components, making it easier to work with structured data.
+
+Top 5 Use Cases for Regular Expressions:
+Let's explore some of the most common use cases for regular expressions:
+
+    Validation of Email Addresses: Regex can be used to validate whether an email address follows the standard format, including the presence of an "@" symbol, domain name, and top-level domain.
+
+    Phone Number Formatting: Regex can enforce specific formats for phone numbers, such as (123) 456-7890 for US numbers or +91-1234567890 for Indian numbers.
+
+    URL Parsing: Regular expressions can parse URLs to extract components like the protocol (e.g., http, https), domain name, path, query parameters, and fragments.
+
+    Data Extraction from HTML/XML: Regex can extract data from HTML or XML documents by matching specific tags, attributes, or content within the markup.
+
+    Search and Replace Operations: Regex enables efficient search and replace operations within text. For example, replacing all occurrences of a word or phrase with another word or phrase, or removing unwanted characters.
+
+Top 50 exemples of regular expressions:
+    Match a sequence of digits: \d+
+    Match a sequence of letters: [a-zA-Z]+
+    Match a sequence of alphanumeric characters: \w+
+    Match a specific word: \bword\b
+    Match an email address: \b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b
+    Match a URL: (https?|ftp|file):\/\/[-A-Za-z0-9+&@#\/%?=~_|!:,.;]+[-A-Za-z0-9+&@#\/%=~_|]
+    Match a phone number: ^\+(?:[0-9] ?){6,14}[0-9]$
+    Match an IP address: \b(?:\d{1,3}\.){3}\d{1,3}\b
+    Match a date in YYYY-MM-DD format: \b\d{4}-\d{2}-\d{2}\b
+    Match a hexadecimal color code: #?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})
+    Match a positive integer: \b\d+\b
+    Match a negative integer: -?\b\d+\b
+    Match a floating-point number: -?\d+(\.\d+)?
+    Match whitespace characters: \s+
+    Match non-whitespace characters: \S+
+    Match word characters (letters, digits, underscores): \w+
+    Match non-word characters: \W+
+    Match word boundary: \b
+    Match non-word boundary: \B
+    Match a word with a specific length: \b\w{5}\b
+    Match a word with a minimum length: \b\w{3,}\b
+    Match a word with a maximum length: \b\w{,8}\b
+    Match a word with a range of lengths: \b\w{3,8}\b
+    Match whitespace at the beginning of a line: ^\s+
+    Match whitespace at the end of a line: \s+$
+    Match a word at the beginning of a line: ^\w+
+    Match a word at the end of a line: \w+$
+    Match a word containing a specific substring: \b\w*substring\w*\b
+    Match an HTML tag: <([a-zA-Z][a-zA-Z0-9]*)\b[^>]*>
+    Match a CSS class selector: \.[a-zA-Z][\w-]*
+    Match a CSS ID selector: #[a-zA-Z][\w-]*
+    Match a specific character: character
+    Match characters within a range: [a-z]
+    Match characters not within a range: [^a-z]
+    Match any character except newline: [\s\S]
+    Match one or more occurrences: +
+    Match zero or more occurrences: *
+    Match zero or one occurrence: ?
+    Match exactly n occurrences: {n}
+    Match at least n occurrences: {n,}
+    Match between n and m occurrences: {n,m}
+    Match the start of a string: ^
+    Match the end of a string: $
+    Match a newline character: \n
+    Match a tab character: \t
+    Match a carriage return: \r
+    Match a backslash: \\
+    Match a period: \. (escaping the period to match a literal period)
+    Match a hyphen: \- (escaping the hyphen to match a literal hyphen)
+    Match a word that doesn't contain a specific substring: \b(?!substring)\w+\b
