@@ -35,7 +35,7 @@ export default class UserController {
       const { email, name, password } = req.body;
       const user = await this.service.signup(email, name, password);
       res.status(StatusCodes.CREATED).json(user);
-    } catch (error) {
+    } catch (error:any) {
       console.error(error);
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
     }
@@ -52,7 +52,7 @@ export default class UserController {
       const { email, password } = req.body;
       const user = await this.service.login(email, password);
       res.status(StatusCodes.OK).json(user);
-    } catch (error) {
+    } catch (error:any) {
       console.error(error);
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
     }
@@ -62,7 +62,7 @@ export default class UserController {
     try {
       const user = await this.service.getById(req.user);
       res.status(StatusCodes.OK).json(user);
-    } catch (error) {
+    } catch (error:any) {
       console.error(error);
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
     }
@@ -72,7 +72,7 @@ export default class UserController {
     try {
       await this.service.deleteById(req.user);
       res.status(StatusCodes.NO_CONTENT).json({});
-    } catch (error) {
+    } catch (error:any) {
       console.error(error);
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
     }
@@ -88,7 +88,7 @@ export default class UserController {
       };
       await this.service.update(payload);
       res.status(StatusCodes.OK).json({});
-    } catch (error) {
+    } catch (error:any) {
       console.error(error);
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
     }
