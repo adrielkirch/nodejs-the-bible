@@ -16,7 +16,7 @@ export default class UserService {
     }
     const hashPassword = SecurityUtil.generateHashWithSalt(password);
     const user = await this.repository.signup(email, name, hashPassword);
-    return user;
+    return user.toObject();
   }
 
   async login(email: string, password: string): Promise<any> {
