@@ -1,0 +1,46 @@
+{
+  "name": "assessment_nous",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "mocha --serial -n loader=ts-node/esm -p ./test/**/*.spec.ts --timeout 100000",
+    "lint": "eslint . --ext .ts",
+    "start": "nodemon --exec ts-node --esm -r tsconfig-paths/register",
+    "build": "tsc"
+  },
+  "author": "Adriel Kirch",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "http-status-codes": "^2.3.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.2.1",
+    "swagger-ui-express": "^5.0.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.12",
+    "@types/express": "^4.17.17",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/mocha": "^10.0.6",
+    "@types/swagger-ui-express": "^4.1.6",
+    "@typescript-eslint/eslint-plugin": "^5.59.7",
+    "@typescript-eslint/parser": "^5.59.7",
+    "chai": "^5.1.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.41.0",
+    "eslint-plugin-react": "^7.25.3",
+    "mocha": "^10.3.0",
+    "mocha-typescript": "^1.1.17",
+    "mongodb-memory-server": "^9.1.6",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.7.1",
+    "typescript": "~5.0.4"
+  }
+}
