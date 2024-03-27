@@ -10,7 +10,7 @@ interface CustomConnectOptions extends mongoose.ConnectOptions {
   autoCreate?: boolean;
 }
 
-class Mongodb {
+export class Mongodb {
   private db: Connection | undefined;
   private dbName: string | undefined;
   constructor() {

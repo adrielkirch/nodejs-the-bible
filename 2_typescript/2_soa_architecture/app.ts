@@ -7,6 +7,7 @@ import swaggerUI from "swagger-ui-express";
 import swaggerDocument from "./swagger.json";
 import { PORT } from "./config";
 import MongoDb from "./db/db.mongo";
+
 /**
  * Lesson Objective: Implementing a Service-Oriented Architecture (SOA), layered architecture with a fake JSON database to simulate authentication.
  * With all necessary processes to guarantee security, organization, readability, maintainability and test-driven development.
