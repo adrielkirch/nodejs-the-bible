@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
-import { JWT_SECRET_KEY } from "../../config";
+import { JWT_SECRET_KEY } from "../config";
 import { v4 as uuidv4 } from "uuid";
 
 export default class SecurityUtil {

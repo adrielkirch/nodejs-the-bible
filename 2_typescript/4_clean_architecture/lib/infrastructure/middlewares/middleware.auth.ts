@@ -1,12 +1,18 @@
-import {  Response, NextFunction } from "express";
-import SecurityUtil from "../utils/util.security";
+import {  Response, NextFunction, Request } from "express";
+import SecurityUtil from "../../utils/util.security";
 import { StatusCodes } from "http-status-codes";
-import AuthRequest from "../../domain/dto/request/dto.request.auth";
-
-// Define an interface that extends the Request interface to include the user property
 
 
-function authMiddleware(req: AuthRequest, res: Response, next: NextFunction): Response | void {
+declare global {
+  namespace Express {
+      interface Request {
+          user: string; 
+      }
+  }
+}
+
+
+export function authMiddleware(req: Request, res: Response, next: NextFunction): Response | void {
   const authHeader = req.header("Authorization");
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -18,7 +24,7 @@ function authMiddleware(req: AuthRequest, res: Response, next: NextFunction): Re
   const token = authHeader.split(" ")[1];
 
   try {
-    // Assign decoded JWT to the user property
+
     req.user = SecurityUtil.decodedJwt(token);
     next();
   } catch (error) {
@@ -26,4 +32,5 @@ function authMiddleware(req: AuthRequest, res: Response, next: NextFunction): Re
   }
 }
 
-export default authMiddleware;
+
+

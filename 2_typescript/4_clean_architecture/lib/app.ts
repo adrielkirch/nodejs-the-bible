@@ -28,7 +28,7 @@ async function startServer(): Promise<void> {
   app.use("/user", userRouter.createRoutes());
 
   app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
-  await MongoDb.connect();
+  await new MongoDb();
   await app.listen(PORT);
   console.log(`Server is running on port ${PORT}`);
   console.log(`API documentation: http://localhost:${PORT}/api-docs`);

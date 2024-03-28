@@ -1,37 +1,57 @@
 import { User } from "../../../domain/entities/entities.user";
 import { UserRepository } from "../../../application/repositories/repository.user";
-import mongodb, { Mongodb } from "../../databases/database.mongo";
 import { Service } from "typedi";
+import {  Model } from 'mongoose';
+import { UserDocument, UserModel } from "../../../domain/schemas/schema.user";
 
 @Service()
 export class UserPersistence implements UserRepository {
-    private collectionName: string = "users"; 
-    private db: Mongodb = mongodb;
+    private userModel: Model<UserDocument>;
 
-    async create(email: string, password: string, name: string): Promise<User> {
-        const db = await this.db.getInstance(); 
+    constructor() {
+        this.userModel = UserModel;
+    }
 
-        const newUser = {
-            email,
-            password,
-            name,
-        };
-
-        const collection = db.collection(this.collectionName);
-        const result = await collection.insertOne(newUser);
-        const insertedUserId = result.insertedId;
-
-        if (!insertedUserId) {
-            throw new Error("Failed to insert user");
+    private mapToUser(result: any): User | null {
+        if (!result) {
+            return null;
         }
 
-        const user: User = {
-            _id: insertedUserId.toString(),
-            email,
-            password,
-            name,
+        return {
+            _id: result._id.toString(),
+            email: result.email,
+            password: result.password,
+            name: result.name,
         };
+    }
 
-        return user;
+    async signup(email: string, password: string, name: string): Promise<User> {
+        const newUser = await this.userModel.create({ email, password, name });
+        return newUser.toObject();
+    }
+
+    async login(email: string, password: string): Promise<User | null> {
+        const user = await this.userModel.findOne({ email, password }).exec();
+        return this.mapToUser(user);
+    }
+
+    async readByFieldAndValue(field: string, value: string): Promise<User | null> {
+        const user = await this.userModel.findOne({ [field]: value }).exec();
+        return this.mapToUser(user);
+    }
+
+    async readById(id: string): Promise<User | null> {
+        const user = await this.userModel.findById(id);
+        return user ? this.mapToUser(user) : null;
+    }
+
+    async update(id: string, name: string): Promise<void> {
+        await this.userModel.findByIdAndUpdate(id, {
+            name
+        });
+    }
+
+    async delete(id: string): Promise<void> {
+        await this.userModel.findByIdAndDelete(id);
     }
 }
