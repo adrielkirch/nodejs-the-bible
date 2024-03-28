@@ -1,7 +1,9 @@
 import { User } from "../../../domain/entities/entities.user";
 import { UserRepository } from "../../../application/repositories/repository.user";
-import mongodb, {Mongodb} from "../../databases/database.mongo";
+import mongodb, { Mongodb } from "../../databases/database.mongo";
+import { Service } from "typedi";
 
+@Service()
 export class UserPersistence implements UserRepository {
     private collectionName: string = "users"; 
     private db: Mongodb = mongodb;
@@ -23,7 +25,6 @@ export class UserPersistence implements UserRepository {
             throw new Error("Failed to insert user");
         }
 
-       
         const user: User = {
             _id: insertedUserId.toString(),
             email,
