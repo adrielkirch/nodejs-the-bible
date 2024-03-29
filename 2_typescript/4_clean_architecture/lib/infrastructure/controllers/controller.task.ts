@@ -9,7 +9,7 @@ import { DeleteUseCaseImpl } from "../../application/useCases/task/delete/task.d
 import { TaskPersistence } from "../databases/task/databases.task";
 
 @Service()
-export class UserController {
+export class TaskController {
   private addUseCase: AddUseCaseImpl;
   private readByIdUseCase: ReadByIdUseCaseImpl;
   private updateUseCase: UpdateUseCaseImpl;

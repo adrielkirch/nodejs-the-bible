@@ -2,8 +2,8 @@ import { Task } from "../../../domain/entities/entity.task";
 import { TaskRepository } from "../../../application/repositories/repository.task";
 import { Service } from "typedi";
 import { Model } from 'mongoose';
-import { TaskDocument, TaskModel } from "../../../domain/schemas/schema.task.ts";
-import { Status } from "../../../domain/types/taskStatus.ts";
+import { TaskDocument, TaskModel } from "../../../domain/schemas/schema.task";
+import { Status } from "../../../domain/types/taskStatus";
 
 @Service()
 export class TaskPersistence implements TaskRepository {
@@ -31,7 +31,7 @@ export class TaskPersistence implements TaskRepository {
     }
 
     async add(title: string, text: string, expirationDate: Date, remindDate: Date): Promise<Task> {
-        const newTask = await this.taskModel.create({ title, text, expirationDate, remindDate, created: Date.now(), updated: Date.now() });
+        const newTask = await this.taskModel.create({ title, text, expirationDate, remindDate, created: Date.now(), updated: Date.now(), status:"TODO" });
         return newTask.toObject();
     }
 

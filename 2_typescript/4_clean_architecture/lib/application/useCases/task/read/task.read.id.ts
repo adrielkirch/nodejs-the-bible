@@ -1,5 +1,5 @@
 import { Service } from 'typedi';
-import { Task } from '../../../../domain/entities/entities.task';
+import { Task } from '../../../../domain/entities/entity.task';
 import { TaskRepository } from '../../../repositories/repository.task';
 import SecurityUtil from '../../../../utils/util.security';
 

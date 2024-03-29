@@ -1,5 +1,5 @@
 
-import { Task } from "../../domain/entities/entities.task";
+import { Task } from "../../domain/entities/entity.task";
 import { Status } from "../../domain/types/taskStatus";
 
 export interface TaskRepository {

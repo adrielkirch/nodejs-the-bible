@@ -1,18 +1,18 @@
 import { Router } from "express";
 import { check } from "express-validator";
-import { UserController } from "../controllers/controller.user";
+import { TaskController } from "../controllers/controller.task";
 import 'reflect-metadata';
 import { Container } from 'typedi';
 import { authMiddleware } from "../middlewares/middleware.auth";
 
 export class TaskRouter {
   public router: Router;
-  private controller: UserController;
+  private controller: TaskController;
 
   constructor() {
     this.router = Router();
     // Injecting UserController using TypeDI
-    this.controller = Container.get(UserController);
+    this.controller = Container.get(TaskController);
     this.createRoutes();
   }
 
@@ -25,9 +25,9 @@ export class TaskRouter {
         check("text").isString(),
         check("expirationDate").isString(),
         check("remindDate").isString(),
-        check("status").isString()
+     
       ],
-      this.controller.signup.bind(this.controller)
+      this.controller.add.bind(this.controller)
     );
     this.router.delete(
       "/:id",
@@ -38,7 +38,7 @@ export class TaskRouter {
     this.router.get(
       "/:id",
       [authMiddleware, check("id").isLength({ min: 24, max: 24 })],
-      this.controller.me.bind(this.controller)
+      this.controller.read.bind(this.controller)
     );
 
     this.router.put(
