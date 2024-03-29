@@ -1,5 +1,5 @@
 import { Service } from 'typedi';
-import { User } from '../../../../domain/entities/entities.user';
+import { User } from '../../../../domain/entities/entity.user';
 import { UserRepository } from '../../../repositories/repository.user';
 import SecurityUtil from '../../../../utils/util.security';
 import ResponseLoginDTO from '../../../../domain/dto/response/dto.response.login';

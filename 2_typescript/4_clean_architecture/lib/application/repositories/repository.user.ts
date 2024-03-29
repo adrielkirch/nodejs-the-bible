@@ -1,5 +1,5 @@
 
-import { User } from "../../domain/entities/entities.user";
+import { User } from "../../domain/entities/entity.user";
 
 export interface UserRepository {
     signup(email: string, password: string, name: string): Promise<User>;

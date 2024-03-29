@@ -1,7 +1,7 @@
-import { User } from "../../../domain/entities/entities.user";
+import { User } from "../../../domain/entities/entity.user";
 import { UserRepository } from "../../../application/repositories/repository.user";
 import { Service } from "typedi";
-import {  Model } from 'mongoose';
+import { Model } from 'mongoose';
 import { UserDocument, UserModel } from "../../../domain/schemas/schema.user";
 
 @Service()
@@ -22,11 +22,14 @@ export class UserPersistence implements UserRepository {
             email: result.email,
             password: result.password,
             name: result.name,
+            created: result.created,
+            updated: result.updated
         };
     }
 
     async signup(email: string, password: string, name: string): Promise<User> {
-        const newUser = await this.userModel.create({ email, password, name });
+
+        const newUser = await this.userModel.create({ email, password, name, created: Date.now(), updated: Date.now() });
         return newUser.toObject();
     }
 
@@ -47,7 +50,8 @@ export class UserPersistence implements UserRepository {
 
     async update(id: string, name: string): Promise<void> {
         await this.userModel.findByIdAndUpdate(id, {
-            name
+            name,
+            updated: Date.now()
         });
     }
 
