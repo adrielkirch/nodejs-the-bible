@@ -5,6 +5,8 @@ import 'reflect-metadata';
 import { Container } from 'typedi';
 import { authMiddleware } from "../middlewares/middleware.auth";
 import DateUtil from "../../utils/util.date";
+import { Status } from "../../domain/types/taskStatus";
+
 export class TaskRouter {
   public router: Router;
   private controller: TaskController;
@@ -49,6 +51,29 @@ export class TaskRouter {
       ],
       this.controller.update.bind(this.controller)
     );
+
+    this.router.put(
+      "/schedule",
+      [
+        authMiddleware,
+        check("_id").isString().isLength({ min: 24, max: 24 }),
+        check("expirationDate").isString().matches(DateUtil.defaultFormatRegex).withMessage(`Expiration datetime must be in the format "${DateUtil.defaultFormat}"`),
+        check("remindDate").isString().matches(DateUtil.defaultFormatRegex).withMessage(`Remind datetime must be in the format "${DateUtil.defaultFormat}"`),
+      ],
+      this.controller.update.bind(this.controller)
+    );
+
+    this.router.put(
+      "/status",
+      [
+        authMiddleware,
+        check("_id").isString().isLength({ min: 24, max: 24 }),
+        check("status").isString(),
+      
+      ],
+      this.controller.update.bind(this.controller)
+    );
+
     return this.router;
   }
 }

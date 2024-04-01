@@ -1,11 +1,9 @@
 import { Service } from 'typedi';
 import { TaskRepository } from '../../../repositories/repository.task';
-import { Status } from '../../../../domain/types/taskStatus';
-import DateUtil from '../../../../utils/util.date';
 
 
 export interface UpdateUseCase {
-    execute(id: string, title: string, text: string, status: Status, assignTo: string): Promise<void>;
+    execute(id: string, title: string, text: string, assignTo: string): Promise<void>;
 }
 
 @Service()
@@ -13,7 +11,7 @@ export class UpdateUseCaseImpl implements UpdateUseCase {
     constructor(private taskRepository: TaskRepository) {
     }
 
-    async execute(id: string, title: string, text: string, status: Status, assignTo: string): Promise<void> {
+    async execute(id: string, title: string, text: string, assignTo: string): Promise<void> {
         const existData = await this.taskRepository.read(id);
 
         if (!existData) {
@@ -23,7 +21,6 @@ export class UpdateUseCaseImpl implements UpdateUseCase {
         const updateData = {
             title,
             text,
-            status,
             assignTo
         };
 
@@ -39,8 +36,6 @@ export class UpdateUseCaseImpl implements UpdateUseCase {
             id,
             existData.title,
             existData.text,
-        
-            existData.status,
             existData.assignTo
         );
     }

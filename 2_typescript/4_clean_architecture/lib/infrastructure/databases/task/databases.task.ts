@@ -54,9 +54,15 @@ export class TaskPersistence implements TaskRepository {
     }
 
 
-    async update(id: string, title: string, text: string, status: Status): Promise<void> {
+    async update(id: string, title: string, text: string): Promise<void> {
         await this.taskModel.findByIdAndUpdate(id, {
-            title, text, status, updated: Date.now()
+            title, text, updated: Date.now()
+        });
+    }
+
+    async updateStatus(id: string, status:Status): Promise<void> {
+        await this.taskModel.findByIdAndUpdate(id, {
+            status, updated: Date.now()
         });
     }
 

@@ -13,14 +13,20 @@ export default class DateUtil {
         return moment.utc(isoStr).format(this.defaultFormat); // Use moment.utc() to interpret the time as UTC
     }
 
-    static defaultFormatToISO(dateTimeFormated: string): Date | null{
-        if(!dateTimeFormated) {
-            return null;
-        }
+    static defaultFormatToISO(dateTimeFormated: string): Date{
+     
         return moment.utc(dateTimeFormated, this.defaultFormat).toDate();
     }
 
     static isSameOrAfter(dateA: Date | null , dateB: Date | null): boolean {
         return moment(dateA).isSameOrAfter(dateB);
+    }
+
+    static getNowLocalDate(): Date {
+        return moment().toDate();
+    }
+
+    static timeDifferenceInMs(dateA: Date, dateB: Date): number {
+        return moment(dateA).diff(moment(dateB));
     }
 }
