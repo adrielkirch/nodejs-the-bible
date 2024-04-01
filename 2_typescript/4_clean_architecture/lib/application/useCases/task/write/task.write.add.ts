@@ -26,8 +26,9 @@ export class AddUseCaseImpl implements AddUseCase {
             throw new Error(`expirationDate date must be same or after of remindDate`);
         }
         const now = new Date();
-        console.log("now ->",now)
         
+        console.log(now)
+
         const isNowDateSameOrAfter = DateUtil.isSameOrAfter(now, remindDateISO);
 
         if (isNowDateSameOrAfter) {

@@ -1,5 +1,6 @@
 import { Service } from 'typedi';
 import { TaskRepository } from '../../../repositories/repository.task';
+import SchedulerService from '../../../services/service.schedule';
 
 
 export interface DeleteUseCase {
@@ -8,6 +9,7 @@ export interface DeleteUseCase {
 
 @Service()
 export class DeleteUseCaseImpl implements DeleteUseCase {
+    private scheduler = SchedulerService.getInstance();
     constructor(private taskRepository: TaskRepository) {
     }
     async execute(id: string): Promise<void> {
@@ -17,5 +19,6 @@ export class DeleteUseCaseImpl implements DeleteUseCase {
         }
 
         await this.taskRepository.delete(id)
+        this.scheduler.removeScheduler(id);
     }
 }

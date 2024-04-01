@@ -5,7 +5,7 @@ import 'reflect-metadata';
 import { Container } from 'typedi';
 import { authMiddleware } from "../middlewares/middleware.auth";
 import DateUtil from "../../utils/util.date";
-import { Status } from "../../domain/types/taskStatus";
+
 
 export class TaskRouter {
   public router: Router;
@@ -71,7 +71,7 @@ export class TaskRouter {
         check("status").isString(),
       
       ],
-      this.controller.update.bind(this.controller)
+      this.controller.updateStatus.bind(this.controller)
     );
 
     return this.router;

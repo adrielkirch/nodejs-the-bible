@@ -1,4 +1,6 @@
-import moment from "moment";
+
+import moment from 'moment-timezone';
+import { TZ } from '../config';
 
 export default class DateUtil {
     public static defaultFormat: string = "MM/DD/YYYY HH:mm:ss";
@@ -22,11 +24,10 @@ export default class DateUtil {
         return moment(dateA).isSameOrAfter(dateB);
     }
 
-    static getNowLocalDate(): Date {
-        return moment().toDate();
-    }
 
     static timeDifferenceInMs(dateA: Date, dateB: Date): number {
         return moment(dateA).diff(moment(dateB));
     }
 }
+
+

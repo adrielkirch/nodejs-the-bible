@@ -29,7 +29,6 @@ export class UpdateStatusUseCaseImpl implements UpdateStatusUseCase {
 
         const completedStatus = ["DONE", "ARCHIVED"]
         if (completedStatus.includes(status)) {
-            console.log("removing ...")
             this.scheduler.removeScheduler(id);
         }
         
