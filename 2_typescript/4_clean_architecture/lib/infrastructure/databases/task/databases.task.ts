@@ -4,6 +4,7 @@ import { Service } from "typedi";
 import { Model } from 'mongoose';
 import { TaskDocument, TaskModel } from "../../../domain/schemas/schema.task";
 import { Status } from "../../../domain/types/taskStatus";
+import { ObjectId } from 'mongodb';
 
 @Service()
 export class TaskPersistence implements TaskRepository {
@@ -27,11 +28,23 @@ export class TaskPersistence implements TaskRepository {
             expirationDate: result.expirationDate,
             remindDate: result.remindDate,
             status: result.status,
+            assignTo: result.assignTo.toString(),
+            userId: result.userId.toString(),
         };
     }
 
-    async add(title: string, text: string, expirationDate: Date, remindDate: Date): Promise<Task> {
-        const newTask = await this.taskModel.create({ title, text, expirationDate, remindDate, created: Date.now(), updated: Date.now(), status:"TODO" });
+    async add(title: string, text: string, expirationDate: Date, remindDate: Date, assignTo: string, userId: string): Promise<Task> {
+        const newTask = await this.taskModel.create({
+            title,
+            text,
+            expirationDate,
+            remindDate,
+            created: Date.now(),
+            updated: Date.now(),
+            status: "TODO",
+            assignTo: new ObjectId(assignTo),
+            userId: new ObjectId(userId)
+        });
         return newTask.toObject();
     }
 
@@ -41,9 +54,9 @@ export class TaskPersistence implements TaskRepository {
     }
 
 
-    async update(id: string, title: string, text: string, expirationDate: Date, remindDate: Date, status: Status): Promise<void> {
+    async update(id: string, title: string, text: string, status: Status): Promise<void> {
         await this.taskModel.findByIdAndUpdate(id, {
-            title, text, expirationDate, remindDate, status, updated: Date.now()
+            title, text, status, updated: Date.now()
         });
     }
 

@@ -32,8 +32,8 @@ export class TaskController {
     }
 
     try {
-      const { title, text, expirationDate, remindDate } = req.body;
-      const newTask = await this.addUseCase.execute(title, text, expirationDate, remindDate);
+      const { title, text, expirationDate, remindDate,assignTo } = req.body;
+      const newTask = await this.addUseCase.execute(title, text, expirationDate, remindDate,assignTo,req.user);
       res.status(StatusCodes.CREATED).json(newTask);
     } catch (error: any) {
       console.error(error);
@@ -64,9 +64,9 @@ export class TaskController {
       res.status(StatusCodes.BAD_REQUEST).json({ errors: errors.array() });
       return;
     }
-    const { _id, title, text, expirationDate, remindDate, status } = req.body;
+    const { _id, title, text, status,assignTo } = req.body;
     try {
-      await this.updateUseCase.execute(_id, title, text, expirationDate, remindDate, status);
+      await this.updateUseCase.execute(_id, title, text, status, assignTo);
       res.status(StatusCodes.OK).json({});
     } catch (error: any) {
       console.error(error);

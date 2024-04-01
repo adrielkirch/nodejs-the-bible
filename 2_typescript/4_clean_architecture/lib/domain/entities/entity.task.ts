@@ -9,8 +9,10 @@ export class Task {
   public readonly expirationDate: Date;
   public readonly remindDate: Date;
   public readonly status: Status;
+  public readonly assignTo: string;
+  public readonly userId: string;
 
-  constructor(_id: string, title: string, text: string, created: Date, updated: Date, expirationDate: Date, remindDate: Date,status: Status) {
+  constructor(_id: string, title: string, text: string, created: Date, updated: Date, expirationDate: Date, remindDate: Date,status: Status,assignTo: string,userId:string) {
     this._id = _id;
     this.title = title;
     this.text = text;
@@ -19,5 +21,7 @@ export class Task {
     this.expirationDate = expirationDate;
     this.remindDate = remindDate;
     this.status = status;
+    this.userId = userId;
+    this.assignTo = assignTo;
   }
 }
