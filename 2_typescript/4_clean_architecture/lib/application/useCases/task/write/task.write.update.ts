@@ -16,7 +16,7 @@ export class UpdateUseCaseImpl implements UpdateUseCase {
         const exists = await this.taskRepository.read(id);
 
         if (!exists) {
-            throw new Error(`User ${id} does not exists`);
+            throw new Error(`Task ${id} does not exists`);
         }
 
         await this.taskRepository.update(id, title, text, expirationDate, remindDate,status)

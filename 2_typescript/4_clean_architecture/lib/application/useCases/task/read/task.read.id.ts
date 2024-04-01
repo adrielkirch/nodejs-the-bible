@@ -15,7 +15,7 @@ export class ReadByIdUseCaseImpl implements ReadByIdUseCase {
     async execute(id:string): Promise<Task | null> {
         const task = await this.taskRepository.read(id);
         if(!task) {
-            throw new Error(`Email or password incorrect(s)`);
+            throw new Error(`Task ${id} not found`);
         }
         return task;
     }
