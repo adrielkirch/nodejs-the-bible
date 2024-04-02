@@ -1,6 +1,6 @@
-# Easy node.js
+# Node.js The Bible
 
-Node.js will be too easy learning with this repository
+Welcome to Node.js: The Bible repository, your comprehensive guide to mastering Node.js development from scratch to advanced topics. Whether you're a beginner looking to understand the basics or an experienced developer seeking to deepen your knowledge, this repository is designed to be your go-to resource.
 
 ## Course repository organization
 
@@ -14,7 +14,15 @@ This repository is organized into modules, each covering different aspects of No
 
 To start the server for a particular lesson, you can use the npm start command followed by the path to the app.js file within the desired lesson directory. This ensures that the server defined in that specific app.js file is launched. Exemple the first lesson which it's used a app.js in "Express.js introduction"
 
-```npm start 1_javascript/2_module_express/1_lesson_express_introduction/app.js```
+``` cd 1_javascript/ ```
+``` npm start ./2_module_express/1_lesson_express_introduction/app.js ```
+
+## Test 
+
+To test a file for a particular lesson, you can use the npm start command followed by the path to the actual test, within the desired lesson directory.
+
+``` cd 1_javascript/ ```
+```npm run test ./2_module_express/3_lesson_soa_architecture/test.js```
 
 ## What is Node.js?
 
