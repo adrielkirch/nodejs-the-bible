@@ -2,13 +2,13 @@ import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 import bodyParser from "body-parser";
-import { UserRouter } from "./routes/route.user";
+import { UserRouter } from "./infrastructure/routes/route.user";
+import { TaskRouter } from "./infrastructure/routes/route.task";
+import { CommentRouter } from "./infrastructure/routes/route.comment";
 import swaggerUI from "swagger-ui-express";
 import swaggerDocument from "./swagger.json";
 import { PORT } from "./config";
-import MongoDb from "./db/db.mongo";
-
-
+import MongoDb from "./infrastructure/databases/database.mongo";
 /**
  * Lesson Objective: Implementing a Service-Oriented Architecture (SOA), layered architecture with a fake JSON database to simulate authentication.
  * With all necessary processes to guarantee security, organization, readability, maintainability and test-driven development.
@@ -22,15 +22,16 @@ import MongoDb from "./db/db.mongo";
  */
 async function startServer(): Promise<void> {
   const userRouter: UserRouter = new UserRouter();
+  const taskRouter: TaskRouter = new TaskRouter();
+  const commentRouter: CommentRouter = new CommentRouter();
   const app = express();
 
   app.use(bodyParser.json());
-
-  // Set up user Route
   app.use("/user", userRouter.createRoutes());
-
+  app.use("/task", taskRouter.createRoutes());
+  app.use("/comment", commentRouter.createRoutes());
   app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
-  await MongoDb.connect();
+  await new MongoDb();
   await app.listen(PORT);
   console.log(`Server is running on port ${PORT}`);
   console.log(`API documentation: http://localhost:${PORT}/api-docs`);

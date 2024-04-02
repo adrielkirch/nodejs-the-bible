@@ -1,0 +1,387 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Service Oriented Architecture",
+    "description": "Implementing a Service-Oriented Architecture (SOA), layered architecture with a fake JSON database to simulate authentication. With all necessary processes to guarantee security, organization, readability, maintainability and test-driven development.",
+    "version": "1.0.0"
+  },
+  "basePath": "/",
+
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+
+  "paths": {
+    "/user/login": {
+      "post": {
+        "summary": "User login",
+        "tags": ["Users"],
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/user/signup": {
+      "post": {
+        "summary": "User signup",
+        "tags": ["Users"],
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password"
+                  }
+                },
+                "required": ["email", "name", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User signed up successfully."
+          },
+          "400": {
+            "description": "Bad request. Invalid input data."
+          }
+        }
+      }
+    },
+    "/user/me": {
+      "get": {
+        "summary": "Get current personal information",
+        "tags": ["Users"],
+        "security": [{ "bearerAuth": [] }],
+        
+        "responses": {
+          "200": {
+            "description": "User signed up successfully."
+          },
+          "400": {
+            "description": "Bad request. Invalid input data."
+          }
+        }
+      }
+    },
+    "/user": {
+      "put": {
+        "description": "Route to update a user by _id",
+        "summary": "Update a user by _id",
+        "tags": ["Users"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "John"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+
+      "delete": {
+        "description": "Route to delete a user by _id",
+        "summary": "Delete a user by _id",
+        "tags": ["Users"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "204": {
+            "description": "No content"
+          }
+        }
+      }
+    },
+    "/tasks": {
+      "post": {
+        "summary": "Create a task",
+        "tags": ["Tasks"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": { "type": "string" },
+                  "text": { "type": "string" },
+                  "expirationDate": { "type": "string" },
+                  "remindDate": { "type": "string" },
+                  "assignTo": { "type": "string", "minLength": 24, "maxLength": 24 }
+                },
+                "required": ["title", "text", "expirationDate", "remindDate", "assignTo"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad request. Invalid input data."
+          }
+        }
+      }
+    },
+    "/tasks/{id}": {
+      "get": {
+        "summary": "Get a task by ID",
+        "tags": ["Tasks"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": { "type": "string", "minLength": 24, "maxLength": 24 }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Task not found."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a task by ID",
+        "tags": ["Tasks"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": { "type": "string", "minLength": 24, "maxLength": 24 }
+        }],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Task not found."
+          }
+        }
+      }
+    },
+    "/tasks/schedule": {
+      "put": {
+        "summary": "Schedule a task",
+        "tags": ["Tasks"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "_id": { "type": "string", "minLength": 24, "maxLength": 24 },
+                  "expirationDate": { "type": "string" },
+                  "remindDate": { "type": "string"}
+                },
+                "required": ["_id", "expirationDate", "remindDate"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Task not found."
+          }
+        }
+      }
+    },
+    "/tasks/status": {
+      "put": {
+        "summary": "Update task status",
+        "tags": ["Tasks"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "_id": { "type": "string", "minLength": 24, "maxLength": 24 },
+                  "status": { "type": "string" }
+                },
+                "required": ["_id", "status"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Task not found."
+          }
+        }
+      }
+    },
+    "/comments": {
+      "post": {
+        "summary": "Create a comment",
+        "tags": ["Comments"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": { "type": "string" },
+                  "text": { "type": "string" },
+                  "taskId": { "type": "string", "minLength": 24, "maxLength": 24 }
+                },
+                "required": ["title", "text", "taskId"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad request. Invalid input data."
+          }
+        }
+      }
+    },
+    "/comments/{id}": {
+      "get": {
+        "summary": "Get a comment by ID",
+        "tags": ["Comments"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": { "type": "string", "minLength": 24, "maxLength": 24 }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Comment not found."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a comment by ID",
+        "tags": ["Comments"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": { "type": "string", "minLength": 24, "maxLength": 24 }
+        }],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Comment not found."
+          }
+        }
+      }
+    },
+    "/comments/task/{id}": {
+      "get": {
+        "summary": "Get all comments by task ID",
+        "tags": ["Comments"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": { "type": "string", "minLength": 24, "maxLength": 24 }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Task not found."
+          }
+        }
+      }
+      
+    }
+    
+  
+  }
+}
