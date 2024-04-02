@@ -2,6 +2,22 @@
 
 Welcome to Node.js: The Bible repository, your comprehensive guide to mastering Node.js development from scratch to advanced topics. Whether you're a beginner looking to understand the basics or an experienced developer seeking to deepen your knowledge, this repository is designed to be your go-to resource.
 
+### We do have ###
+
+Two projects:
+
+1 - JavaScript Project (1_javascript):
+
+To navigate to the JavaScript project directory, run:
+
+``` cd 1_javascript/ ```
+
+2 - TypeScript Project (2_typescript):
+
+To navigate to the TypeScript project directory, run:
+
+```cd 2_typescript/```
+
 ## Course repository organization
 
 This repository is organized into modules, each covering different aspects of Node.js development. Within each module, there are individual lessons that delve into specific topics or concepts related to Node.js. Each lesson is accompanied by its own set of files, which may include code examples, explanations, exercises, quizzes, or other relevant material.
