@@ -6,6 +6,7 @@ import { AddUseCaseImpl } from "../../application/useCases/task/write/task.write
 import { ReadByIdUseCaseImpl } from "../../application/useCases/task/read/task.read.id";
 import { UpdateUseCaseImpl } from "../../application/useCases/task/write/task.write.update";
 import { UpdateStatusUseCaseImpl } from "../../application/useCases/task/write/task.write.update.status";
+import { UpdateScheduleUseCaseImpl } from "../../application/useCases/task/write/task.write.update.schedule";
 import { DeleteUseCaseImpl } from "../../application/useCases/task/delete/task.delete";
 import { TaskPersistence } from "../databases/task/databases.task";
 
@@ -15,6 +16,7 @@ export class TaskController {
   private readByIdUseCase: ReadByIdUseCaseImpl;
   private updateUseCase: UpdateUseCaseImpl;
   private updateStatusUseCase: UpdateStatusUseCaseImpl;
+  private updateScheduleUseCase: UpdateScheduleUseCaseImpl;
   private deleteUseCase: DeleteUseCaseImpl;
   private persistence: TaskPersistence;
 
@@ -24,6 +26,7 @@ export class TaskController {
     this.readByIdUseCase = new ReadByIdUseCaseImpl(this.persistence);
     this.updateUseCase = new UpdateUseCaseImpl(this.persistence);
     this.updateStatusUseCase = new UpdateStatusUseCaseImpl(this.persistence)
+    this.updateScheduleUseCase = new UpdateScheduleUseCaseImpl(this.persistence)
     this.deleteUseCase = new DeleteUseCaseImpl(this.persistence);
   }
 
@@ -70,6 +73,21 @@ export class TaskController {
     const { _id, title, text, assignTo } = req.body;
     try {
       await this.updateUseCase.execute(_id, title, text, assignTo);
+      res.status(StatusCodes.OK).json({});
+    } catch (error: any) {
+      console.error(error);
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
+    }
+  }
+  async updateSchedule(req: Request, res: Response): Promise<void> {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.status(StatusCodes.BAD_REQUEST).json({ errors: errors.array() });
+      return;
+    }
+    const { _id, expirationDate, remindDate} = req.body;
+    try {
+      await this.updateScheduleUseCase.execute(_id, expirationDate, remindDate);
       res.status(StatusCodes.OK).json({});
     } catch (error: any) {
       console.error(error);

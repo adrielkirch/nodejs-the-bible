@@ -60,7 +60,7 @@ export class TaskRouter {
         check("expirationDate").isString().matches(DateUtil.defaultFormatRegex).withMessage(`Expiration datetime must be in the format "${DateUtil.defaultFormat}"`),
         check("remindDate").isString().matches(DateUtil.defaultFormatRegex).withMessage(`Remind datetime must be in the format "${DateUtil.defaultFormat}"`),
       ],
-      this.controller.update.bind(this.controller)
+      this.controller.updateSchedule.bind(this.controller)
     );
 
     this.router.put(

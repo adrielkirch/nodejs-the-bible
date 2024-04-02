@@ -66,6 +66,15 @@ export class TaskPersistence implements TaskRepository {
         });
     }
 
+    async updateSchedule(id: string, expirationDate: Date, remindDate: Date): Promise<void> {
+        await this.taskModel.findByIdAndUpdate(id, {
+            expirationDate,
+            remindDate,
+            updated: Date.now()
+        })
+    }
+    
+
     async delete(id: string): Promise<void> {
         await this.taskModel.findByIdAndDelete(id);
     }
