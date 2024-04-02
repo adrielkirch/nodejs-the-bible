@@ -2,9 +2,7 @@
 
 Welcome to Node.js: The Bible repository, your comprehensive guide to mastering Node.js development from scratch to advanced topics. Whether you're a beginner looking to understand the basics or an experienced developer seeking to deepen your knowledge, this repository is designed to be your go-to resource.
 
-### We do have ###
-
-Two projects:
+### Two projects: ###
 
 1 - JavaScript Project (1_javascript):
 
