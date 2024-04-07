@@ -36,11 +36,14 @@ export class UserController {
 
     try {
       const { email, name, password } = req.body;
+
       const newUser = await this.signupUseCase.execute(email, password, name);
       res.status(StatusCodes.CREATED).json(newUser);
     } catch (error: any) {
       console.error(error);
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ error: error.message });
     }
   }
 
@@ -57,7 +60,9 @@ export class UserController {
       res.status(StatusCodes.OK).json(authData);
     } catch (error: any) {
       console.error(error);
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ error: error.message });
     }
   }
 
@@ -73,7 +78,9 @@ export class UserController {
       res.status(StatusCodes.OK).json(user);
     } catch (error: any) {
       console.error(error);
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ error: error.message });
     }
   }
 
@@ -89,7 +96,9 @@ export class UserController {
       res.status(StatusCodes.OK).json({});
     } catch (error: any) {
       console.error(error);
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ error: error.message });
     }
   }
 
@@ -100,12 +109,13 @@ export class UserController {
       return;
     }
     try {
-      
-       await this.deleteUseCase.execute(req.user);
+      await this.deleteUseCase.execute(req.user);
       res.status(StatusCodes.NO_CONTENT).json({});
     } catch (error: any) {
       console.error(error);
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ error: error.message });
     }
   }
 }
