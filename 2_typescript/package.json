@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "test": "npx mocha -w --parallel --serial -n loader=ts-node/esm -p --timeout 100000",
+    "test": "npx mocha -r ts-node/register --timeout 10000",
     "lint": "eslint . --ext .ts",
     "start": "nodemon --exec ts-node --esm -r tsconfig-paths/register",
     "build": "tsc"

@@ -27,6 +27,7 @@ export default class SecurityUtil {
   }
 
   static generateHashDigitalSignature(data: string): string {
+  
     return crypto
       .createHash("sha512")
       .update(data + new Date() + this.genRandomBytes(64))

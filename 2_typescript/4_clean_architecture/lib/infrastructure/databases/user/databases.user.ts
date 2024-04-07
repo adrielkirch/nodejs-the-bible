@@ -28,7 +28,6 @@ export class UserPersistence implements UserRepository {
     }
 
     async signup(email: string, password: string, name: string): Promise<User> {
-
         const newUser = await this.userModel.create({ email, password, name, created: Date.now(), updated: Date.now() });
         return newUser.toObject();
     }

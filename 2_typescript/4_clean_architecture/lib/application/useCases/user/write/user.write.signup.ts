@@ -13,7 +13,7 @@ export class SignupUseCaseImpl implements SignupUseCase {
     }
 
     async execute(email: string, password: string, name: string): Promise<User> {
-
+        
         const exists = await this.userRepository.readByFieldAndValue('email',email);
 
         if(exists) {

@@ -25,10 +25,6 @@
     "skipLibCheck": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,    
-  },
-  
-  "include": [
-    "**/*.spec.ts"
-  ]
+  }
 
 }

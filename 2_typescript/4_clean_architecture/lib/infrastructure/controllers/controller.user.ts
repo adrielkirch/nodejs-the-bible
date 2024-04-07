@@ -8,6 +8,15 @@ import { UserPersistence } from "../databases/user/databases.user";
 import { ReadByIdUseCaseImpl } from "../../application/useCases/user/read/user.read.id";
 import { UpdateUseCaseImpl } from "../../application/useCases/user/write/user.write.update";
 import { DeleteUseCaseImpl } from "../../application/useCases/user/delete/user.delete.user";
+import { UserRepository } from "../../application/repositories/repository.user";
+
+declare global {
+  namespace Express {
+      interface Request {
+          user: string; 
+      }
+  }
+}
 
 @Service()
 export class UserController {
@@ -16,7 +25,7 @@ export class UserController {
   private readByIdUseCase: ReadByIdUseCaseImpl;
   private updateUseCase: UpdateUseCaseImpl;
   private deleteUseCase: DeleteUseCaseImpl;
-  private persistence: UserPersistence;
+  private persistence: UserRepository;
 
   constructor() {
     this.persistence = Container.get(UserPersistence);
@@ -36,7 +45,6 @@ export class UserController {
 
     try {
       const { email, name, password } = req.body;
-
       const newUser = await this.signupUseCase.execute(email, password, name);
       res.status(StatusCodes.CREATED).json(newUser);
     } catch (error: any) {
