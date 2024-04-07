@@ -11,7 +11,6 @@ declare global {
   }
 }
 
-
 export function authMiddleware(req: Request, res: Response, next: NextFunction): Response | void {
   const authHeader = req.header("Authorization");
 
