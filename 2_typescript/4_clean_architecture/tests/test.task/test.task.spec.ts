@@ -27,8 +27,8 @@ class TestTaskClass {
       title: "Lorem ipsum dolor tortor",
       text: "Lorem ipsum ...",
       assignTo: "660af95a6b8c3dad366cd9b1",
-      expirationDate: "09/01/2200 00:00:01",
-      remindDate: "09/01/2200 00:00:00",
+      expirationDate: `01/01/${new Date().getFullYear()+1} 00:00:01`,
+      remindDate: `01/01/${new Date().getFullYear()+1} 00:00:00`,
     },
     ""
   ) as Request;
@@ -72,8 +72,8 @@ class TestTaskClass {
         assert.strictEqual(this.res.statusCode, StatusCodes.OK);
       });
       it("should test schedule update task", async () => {
-        const newRemindDate = "11/01/2200 00:00:01";
-        const newExpirationDate = "11/01/2200 00:00:02";
+        const newRemindDate = `01/02/${new Date().getFullYear()+1} 00:00:01`;
+        const newExpirationDate = `01/02/${new Date().getFullYear()+1} 00:00:02`;
         this.req.body.remindDate = newRemindDate;
         this.req.body.expirationDate = newExpirationDate;
         await this.controller.updateSchedule(this.req, this.res);
