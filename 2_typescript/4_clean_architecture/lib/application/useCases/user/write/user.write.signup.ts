@@ -21,7 +21,7 @@ export class SignupUseCaseImpl implements SignupUseCase {
         }
         const hashPassword = SecurityUtil.generateHashWithSalt(password);
         let newUser = await this.userRepository.signup(email, hashPassword, name);
-        newUser = SecurityUtil.removeSensitiveProperty(newUser, "password");
-        return newUser;
+        const newUserSecurity = SecurityUtil.removeSensitiveProperty({...newUser}, "password");
+        return newUserSecurity;
     }
 }

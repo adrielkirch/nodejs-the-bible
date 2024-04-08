@@ -4,19 +4,10 @@ import { validationResult } from "express-validator";
 import { Service, Container } from "typedi";
 import { SignupUseCaseImpl } from "../../application/useCases/user/write/user.write.signup";
 import { LoginUseCaseImpl } from "../../application/useCases/user/write/user.write.login";
-import { UserPersistence } from "../databases/user/databases.user";
 import { ReadByIdUseCaseImpl } from "../../application/useCases/user/read/user.read.id";
 import { UpdateUseCaseImpl } from "../../application/useCases/user/write/user.write.update";
 import { DeleteUseCaseImpl } from "../../application/useCases/user/delete/user.delete.user";
 import { UserRepository } from "../../application/repositories/repository.user";
-
-declare global {
-  namespace Express {
-      interface Request {
-          user: string; 
-      }
-  }
-}
 
 @Service()
 export class UserController {
@@ -25,10 +16,9 @@ export class UserController {
   private readByIdUseCase: ReadByIdUseCaseImpl;
   private updateUseCase: UpdateUseCaseImpl;
   private deleteUseCase: DeleteUseCaseImpl;
-  private persistence: UserRepository;
 
-  constructor() {
-    this.persistence = Container.get(UserPersistence);
+  constructor(private persistence: UserRepository) {
+    this.persistence = persistence;
     this.signupUseCase = new SignupUseCaseImpl(this.persistence);
     this.loginUseCase = new LoginUseCaseImpl(this.persistence);
     this.readByIdUseCase = new ReadByIdUseCaseImpl(this.persistence);
@@ -46,6 +36,7 @@ export class UserController {
     try {
       const { email, name, password } = req.body;
       const newUser = await this.signupUseCase.execute(email, password, name);
+
       res.status(StatusCodes.CREATED).json(newUser);
     } catch (error: any) {
       console.error(error);

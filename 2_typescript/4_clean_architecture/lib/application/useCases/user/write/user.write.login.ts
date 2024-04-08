@@ -11,6 +11,7 @@ export interface LoginUseCase {
 @Service()
 export class LoginUseCaseImpl implements LoginUseCase {
     constructor(private userRepository: UserRepository) {
+        
     }
 
     async execute(email: string, password: string): Promise<ResponseLoginDTO> {

@@ -1,6 +1,9 @@
 Welcome to the Node.js Clean Architecture Task Manager project challenge!
 
-In this challenge, you will embark on building a robust task management application using clean architecture principles. Your goal is to implement features for user authentication, task management, and comments associated with tasks. To ensure a clean and scalable codebase, you will apply test-driven development (TDD) methodology alongside implementing dependency injection and adhering to a specific folder structure comprising application, domain, and infrastructure layers.
+In this challenge, you will embark on building a robust task management application using clean architecture principles. 
+Your goal is to implement features for user authentication, task management, and comments associated with tasks. 
+Each task should have a remind scheduler using I/O concepts in others
+To ensure a clean and scalable codebase, you will apply test-driven development (TDD) methodology alongside, unsure to mock database functions
 
 Folder Structure:
 
@@ -44,4 +47,4 @@ Implementation Guidelines:
     Implement validation and error handling mechanisms for robustness.
     Follow RESTful API design principles for defining endpoints.
     Write comprehensive unit and integration tests to ensure functionality and reliability.
-    Utilize Git for version control, with clear and concise commit messages.
+    

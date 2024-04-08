@@ -1,17 +1,16 @@
 import { Router } from "express";
 import { check } from "express-validator";
 import { CommentController } from "../controllers/controller.comment";
-import 'reflect-metadata';
-import { Container } from 'typedi';
+import "reflect-metadata";
+import { Container, Service } from "typedi";
 import { authMiddleware } from "../middlewares/middleware.auth";
 
+@Service()
 export class CommentRouter {
   public router: Router;
   private controller: CommentController;
-
   constructor() {
     this.router = Router();
-    // Injecting UserController using TypeDI
     this.controller = Container.get(CommentController);
     this.createRoutes();
   }
@@ -44,7 +43,6 @@ export class CommentRouter {
       [authMiddleware, check("id").isLength({ min: 24, max: 24 })],
       this.controller.readByTasks.bind(this.controller)
     );
-
 
     this.router.put(
       "/",

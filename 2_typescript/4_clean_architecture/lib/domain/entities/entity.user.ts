@@ -6,7 +6,14 @@ export class User {
   public readonly created: Date;
   public readonly updated: Date;
 
-  constructor(email: string, password: string, name: string, _id: string = "", created: Date, updated: Date) {
+  constructor(
+    _id: string = "",
+    email: string,
+    password: string,
+    name: string,
+    created: Date,
+    updated: Date
+  ) {
     this.email = email;
     this.password = password;
     this.name = name;

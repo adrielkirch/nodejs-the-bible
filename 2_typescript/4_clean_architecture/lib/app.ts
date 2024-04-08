@@ -9,6 +9,11 @@ import swaggerUI from "swagger-ui-express";
 import swaggerDocument from "./swagger.json";
 import { PORT } from "./config";
 import MongoDb from "./infrastructure/databases/database.mongo";
+import dependecyInjections from "./dependency-injection";
+import Container from "typedi";
+
+
+
 /**
  * Lesson Objective: Implementing a Service-Oriented Architecture (SOA), layered architecture with a fake JSON database to simulate authentication.
  * With all necessary processes to guarantee security, organization, readability, maintainability and test-driven development.
@@ -21,11 +26,13 @@ import MongoDb from "./infrastructure/databases/database.mongo";
  * @returns {Promise<void>} A Promise that resolves when the server has started successfully.
  */
 async function startServer(): Promise<void> {
-  const userRouter: UserRouter = new UserRouter();
-  const taskRouter: TaskRouter = new TaskRouter();
-  const commentRouter: CommentRouter = new CommentRouter();
-  const app = express();
+  dependecyInjections();
 
+  const userRouter: UserRouter = Container.get(UserRouter);
+  const taskRouter: TaskRouter = Container.get(TaskRouter);
+  const commentRouter: CommentRouter = Container.get(CommentRouter);
+
+  const app = express();
   app.use(bodyParser.json());
   app.use("/user", userRouter.createRoutes());
   app.use("/task", taskRouter.createRoutes());
@@ -36,5 +43,6 @@ async function startServer(): Promise<void> {
   console.log(`Server is running on port ${PORT}`);
   console.log(`API documentation: http://localhost:${PORT}/api-docs`);
 }
+
 
 startServer();

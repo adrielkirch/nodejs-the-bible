@@ -7,7 +7,8 @@ import { ReadByIdUseCaseImpl } from "../../application/useCases/comment/read/com
 import { ReadByTaskUseCaseImpl } from "../../application/useCases/comment/read/comment.read.task";
 import { UpdateUseCaseImpl } from "../../application/useCases/comment/write/comment.write.update";
 import { DeleteUseCaseImpl } from "../../application/useCases/comment/delete/comment.delete";
-import { CommentPersistence } from "../databases/comment/databases.comment";
+import { CommentRepository } from "../../application/repositories/repository.comment";
+
 
 @Service()
 export class CommentController {
@@ -16,10 +17,10 @@ export class CommentController {
   private readByTaskUseCase: ReadByTaskUseCaseImpl;
   private updateUseCase: UpdateUseCaseImpl;
   private deleteUseCase: DeleteUseCaseImpl;
-  private persistence: CommentPersistence;
 
-  constructor() {
-    this.persistence = Container.get(CommentPersistence);
+
+  constructor(private persistence: CommentRepository) {
+    this.persistence = persistence;
     this.addUseCase = new AddUseCaseImpl(this.persistence);
     this.readByIdUseCase = new ReadByIdUseCaseImpl(this.persistence);
     this.readByTaskUseCase = new ReadByTaskUseCaseImpl(this.persistence);

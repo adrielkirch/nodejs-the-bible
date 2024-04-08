@@ -2,17 +2,18 @@ import { Router } from "express";
 import { check } from "express-validator";
 import { UserController } from "../controllers/controller.user";
 import 'reflect-metadata';
-import { Container } from 'typedi';
+import { Container, Service } from 'typedi';
 import { authMiddleware } from "../middlewares/middleware.auth";
+import { UserRepository } from "../../application/repositories/repository.user";
 
+@Service()
 export class UserRouter {
   public router: Router;
   private controller: UserController;
 
   constructor() {
     this.router = Router();
-    // Injecting UserController using TypeDI
-    this.controller = Container.get(UserController);
+    this.controller = Container.get(UserController)
     this.createRoutes();
   }
 
@@ -56,7 +57,7 @@ export class UserRouter {
       this.controller.delete.bind(this.controller)
     );
 
-
     return this.router;
   }
 }
+

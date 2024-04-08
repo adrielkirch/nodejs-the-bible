@@ -8,7 +8,7 @@ import { UpdateUseCaseImpl } from "../../application/useCases/task/write/task.wr
 import { UpdateStatusUseCaseImpl } from "../../application/useCases/task/write/task.write.update.status";
 import { UpdateScheduleUseCaseImpl } from "../../application/useCases/task/write/task.write.update.schedule";
 import { DeleteUseCaseImpl } from "../../application/useCases/task/delete/task.delete";
-import { TaskPersistence } from "../databases/task/databases.task";
+import { TaskRepository } from "../../application/repositories/repository.task";
 
 @Service()
 export class TaskController {
@@ -18,10 +18,10 @@ export class TaskController {
   private updateStatusUseCase: UpdateStatusUseCaseImpl;
   private updateScheduleUseCase: UpdateScheduleUseCaseImpl;
   private deleteUseCase: DeleteUseCaseImpl;
-  private persistence: TaskPersistence;
 
-  constructor() {
-    this.persistence = Container.get(TaskPersistence);
+
+  constructor(private persistence: TaskRepository) {
+    this.persistence = persistence;
     this.addUseCase = new AddUseCaseImpl(this.persistence);
     this.readByIdUseCase = new ReadByIdUseCaseImpl(this.persistence);
     this.updateUseCase = new UpdateUseCaseImpl(this.persistence);
