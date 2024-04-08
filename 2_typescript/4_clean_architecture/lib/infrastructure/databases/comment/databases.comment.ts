@@ -7,6 +7,7 @@ import {
   CommentModel,
 } from "../../../domain/schemas/schema.comment";
 import { ObjectId } from "mongodb";
+import { CommentUser } from "../../../domain/entities/entity.commentUser";
 
 @Service()
 export class CommentPersistence implements CommentRepository {
@@ -16,7 +17,8 @@ export class CommentPersistence implements CommentRepository {
     this.commentModel = CommentModel;
   }
 
-  private mapToTask(result: any): Comment | null {
+
+  private mapToCommentUser(result: any): CommentUser | null {
     if (!result) {
       return null;
     }
@@ -29,6 +31,14 @@ export class CommentPersistence implements CommentRepository {
       updated: result.updated,
       userId: result.userId.toString(),
       taskId: result.userId.toString(),
+      user: {
+        _id: result.user._id.toString(),
+        email: result.user.email,
+        password: result.user.password,
+        name: result.user.name,
+        created: result.user.created,
+        updated: result.user.updated,
+      },
     };
   }
 
@@ -49,9 +59,23 @@ export class CommentPersistence implements CommentRepository {
     return newTask.toObject();
   }
 
-  async read(id: string): Promise<Comment | null> {
+  async read(id: string): Promise<CommentUser | null> {
     const comment = await this.commentModel.findById(id).exec();
-    return this.mapToTask(comment);
+    const pipeline = [
+      {
+        $lookup: {
+          from: "users",
+          localField: "userId",
+          foreignField: "_id",
+          as: "user",
+        },
+      },
+      {
+        $unwind: "$user",
+      },
+    ];
+    const result = await this.commentModel.aggregate(pipeline);
+    return this.mapToCommentUser(result[0]);
   }
 
   async readBytask(taskId: string): Promise<Comment[] | null> {

@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Service Oriented Architecture",
-    "description": "Implementing a Service-Oriented Architecture (SOA), layered architecture with a fake JSON database to simulate authentication. With all necessary processes to guarantee security, organization, readability, maintainability and test-driven development.",
+    "title": "Clean Architecture Task planner",
+    "description": "In this challenge, you will embark on building a robust task management application using clean architecture principles. Your goal is to implement features for user authentication, task management, and comments associated with tasks. Each task should have a remind scheduler using I/O concepts in others",
     "version": "1.0.0"
   },
   "basePath": "/",
@@ -100,7 +100,7 @@
         "summary": "Get current personal information",
         "tags": ["Users"],
         "security": [{ "bearerAuth": [] }],
-        
+
         "responses": {
           "200": {
             "description": "User signed up successfully."
@@ -170,9 +170,19 @@
                   "text": { "type": "string" },
                   "expirationDate": { "type": "string" },
                   "remindDate": { "type": "string" },
-                  "assignTo": { "type": "string", "minLength": 24, "maxLength": 24 }
+                  "assignTo": {
+                    "type": "string",
+                    "minLength": 24,
+                    "maxLength": 24
+                  }
                 },
-                "required": ["title", "text", "expirationDate", "remindDate", "assignTo"]
+                "required": [
+                  "title",
+                  "text",
+                  "expirationDate",
+                  "remindDate",
+                  "assignTo"
+                ]
               }
             }
           }
@@ -192,12 +202,14 @@
         "summary": "Get a task by ID",
         "tags": ["Tasks"],
         "security": [{ "bearerAuth": [] }],
-        "parameters": [{
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "schema": { "type": "string", "minLength": 24, "maxLength": 24 }
-        }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "minLength": 24, "maxLength": 24 }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -211,12 +223,14 @@
         "summary": "Delete a task by ID",
         "tags": ["Tasks"],
         "security": [{ "bearerAuth": [] }],
-        "parameters": [{
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "schema": { "type": "string", "minLength": 24, "maxLength": 24 }
-        }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "minLength": 24, "maxLength": 24 }
+          }
+        ],
         "responses": {
           "204": {
             "description": "No content"
@@ -241,7 +255,7 @@
                 "properties": {
                   "_id": { "type": "string", "minLength": 24, "maxLength": 24 },
                   "expirationDate": { "type": "string" },
-                  "remindDate": { "type": "string"}
+                  "remindDate": { "type": "string" }
                 },
                 "required": ["_id", "expirationDate", "remindDate"]
               }
@@ -288,7 +302,7 @@
         }
       }
     },
-    "/comments": {
+    "/comment": {
       "post": {
         "summary": "Create a comment",
         "tags": ["Comments"],
@@ -302,7 +316,11 @@
                 "properties": {
                   "title": { "type": "string" },
                   "text": { "type": "string" },
-                  "taskId": { "type": "string", "minLength": 24, "maxLength": 24 }
+                  "taskId": {
+                    "type": "string",
+                    "minLength": 24,
+                    "maxLength": 24
+                  }
                 },
                 "required": ["title", "text", "taskId"]
               }
@@ -319,17 +337,19 @@
         }
       }
     },
-    "/comments/{id}": {
+    "/comment/{id}": {
       "get": {
         "summary": "Get a comment by ID",
         "tags": ["Comments"],
         "security": [{ "bearerAuth": [] }],
-        "parameters": [{
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "schema": { "type": "string", "minLength": 24, "maxLength": 24 }
-        }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "minLength": 24, "maxLength": 24 }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -343,12 +363,14 @@
         "summary": "Delete a comment by ID",
         "tags": ["Comments"],
         "security": [{ "bearerAuth": [] }],
-        "parameters": [{
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "schema": { "type": "string", "minLength": 24, "maxLength": 24 }
-        }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "minLength": 24, "maxLength": 24 }
+          }
+        ],
         "responses": {
           "204": {
             "description": "No content"
@@ -359,17 +381,19 @@
         }
       }
     },
-    "/comments/task/{id}": {
+    "/comment/task/{id}": {
       "get": {
         "summary": "Get all comments by task ID",
         "tags": ["Comments"],
         "security": [{ "bearerAuth": [] }],
-        "parameters": [{
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "schema": { "type": "string", "minLength": 24, "maxLength": 24 }
-        }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "minLength": 24, "maxLength": 24 }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -379,9 +403,6 @@
           }
         }
       }
-      
     }
-    
-  
   }
 }

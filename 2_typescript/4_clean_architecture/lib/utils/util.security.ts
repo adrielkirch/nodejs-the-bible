@@ -27,7 +27,6 @@ export default class SecurityUtil {
   }
 
   static generateHashDigitalSignature(data: string): string {
-  
     return crypto
       .createHash("sha512")
       .update(data + new Date() + this.genRandomBytes(64))
@@ -44,6 +43,19 @@ export default class SecurityUtil {
     field: keyof T
   ): T {
     Reflect.deleteProperty(data, field);
+    return data;
+  }
+
+  static removeSubfieldSensitiveProperty<T extends Record<string, any>>(
+    data: T,
+    field: keyof T,
+    subfield: string
+  ): T {
+    const fieldValue = data[field];
+    if (fieldValue && typeof fieldValue === "object") {
+      Reflect.deleteProperty(fieldValue, subfield);
+      data[field] = fieldValue; 
+    }
     return data;
   }
 }

@@ -30,6 +30,6 @@ export default function dependecyInjections() {
       CommentController,
       new CommentController(Container.get(CommentPersistence))
     );
-    Container.set(CommentRouter, new UserRouter());
+    Container.set(CommentRouter, new CommentRouter());
   }
   

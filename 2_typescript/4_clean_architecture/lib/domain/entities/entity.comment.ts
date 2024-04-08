@@ -1,12 +1,12 @@
 
 export class Comment {
-  public readonly _id: string;
-  public readonly title: string;
-  public readonly text: string;
-  public readonly created: Date;
-  public readonly updated: Date;
-  public readonly userId: string;
-  public readonly taskId: string;
+  public  _id: string;
+  public  title: string;
+  public  text: string;
+  public  created: Date;
+  public  updated: Date;
+  public  userId: string;
+  public  taskId: string;
 
   constructor(_id: string, title: string, text: string, created: Date, updated: Date, userId: string, taskId: string) {
     this._id = _id;

@@ -40,7 +40,7 @@ class TestTaskClass {
   }
 
   testControllers() {
-    describe("Test Task Controller class", () => {
+    describe("Test Comment Controller class", () => {
       beforeEach(() => {
         this.req.user = UserMock.getId();
       });

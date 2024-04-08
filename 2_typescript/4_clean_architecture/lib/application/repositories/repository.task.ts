@@ -1,5 +1,6 @@
 
 import { Task } from "../../domain/entities/entity.task";
+import { TaskUser } from "../../domain/entities/entity.taskUser";
 import { Status } from "../../domain/types/taskStatus";
 
 export interface TaskRepository {
@@ -7,6 +8,6 @@ export interface TaskRepository {
     update(id: string, title: string, text: string, assignTo:string): Promise<void>;
     updateStatus(id: string, status:Status): Promise<void>;
     updateSchedule(id: string,expirationDate: Date, remindDate: Date): Promise<void>;
-    read(id:string): Promise<Task | null>;
+    read(id:string): Promise<TaskUser | null>;
     delete(id:string): Promise<void>;
 }

@@ -12,8 +12,6 @@ import MongoDb from "./infrastructure/databases/database.mongo";
 import dependecyInjections from "./dependency-injection";
 import Container from "typedi";
 
-
-
 /**
  * Lesson Objective: Implementing a Service-Oriented Architecture (SOA), layered architecture with a fake JSON database to simulate authentication.
  * With all necessary processes to guarantee security, organization, readability, maintainability and test-driven development.

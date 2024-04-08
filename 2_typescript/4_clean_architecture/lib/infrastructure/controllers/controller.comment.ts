@@ -9,7 +9,6 @@ import { UpdateUseCaseImpl } from "../../application/useCases/comment/write/comm
 import { DeleteUseCaseImpl } from "../../application/useCases/comment/delete/comment.delete";
 import { CommentRepository } from "../../application/repositories/repository.comment";
 
-
 @Service()
 export class CommentController {
   private addUseCase: AddUseCaseImpl;
@@ -17,7 +16,6 @@ export class CommentController {
   private readByTaskUseCase: ReadByTaskUseCaseImpl;
   private updateUseCase: UpdateUseCaseImpl;
   private deleteUseCase: DeleteUseCaseImpl;
-
 
   constructor(private persistence: CommentRepository) {
     this.persistence = persistence;
@@ -37,14 +35,20 @@ export class CommentController {
 
     try {
       const { title, text, taskId } = req.body;
-      const newTask = await this.addUseCase.execute(title, text, req.user, taskId);
-      res.status(StatusCodes.CREATED).json(newTask);
+      const newComment = await this.addUseCase.execute(
+        title,
+        text,
+        req.user,
+        taskId
+      );
+      res.status(StatusCodes.CREATED).json(newComment);
     } catch (error: any) {
       console.error(error);
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ error: error.message });
     }
   }
-
 
   async read(req: Request, res: Response): Promise<void> {
     const errors = validationResult(req);
@@ -54,14 +58,16 @@ export class CommentController {
     }
     const id = req.params.id;
     try {
-      const user = await this.readByIdUseCase.execute(id);
-      res.status(StatusCodes.OK).json(user);
+      const comment = await this.readByIdUseCase.execute(id);
+      res.status(StatusCodes.OK).json(comment);
     } catch (error: any) {
       console.error(error);
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ error: error.message });
     }
   }
-  
+
   async readByTasks(req: Request, res: Response): Promise<void> {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -70,11 +76,13 @@ export class CommentController {
     }
     const id = req.params.id;
     try {
-      const user = await this.readByTaskUseCase.execute(id);
-      res.status(StatusCodes.OK).json(user);
+      const comments = await this.readByTaskUseCase.execute(id);
+      res.status(StatusCodes.OK).json(comments);
     } catch (error: any) {
       console.error(error);
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ error: error.message });
     }
   }
 
@@ -90,7 +98,9 @@ export class CommentController {
       res.status(StatusCodes.OK).json({});
     } catch (error: any) {
       console.error(error);
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ error: error.message });
     }
   }
 
@@ -106,7 +116,9 @@ export class CommentController {
       res.status(StatusCodes.NO_CONTENT).json({});
     } catch (error: any) {
       console.error(error);
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ error: error.message });
     }
   }
 }
