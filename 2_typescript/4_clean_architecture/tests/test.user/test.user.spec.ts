@@ -18,10 +18,6 @@ declare global {
   }
 }
 
-Container.set(UserMockPersistence, new UserMockPersistence());
-
-
-
 class TestUserClass {
   private controller: UserController;
 
@@ -35,12 +31,12 @@ class TestUserClass {
   private res: any = new MockResponse() as any;
   private persistance: UserMockPersistence;
   constructor() {
-    this.controller = Container.get(UserController)
-    this.persistance = Container.get(UserMockPersistence)
+    this.controller = Container.get(UserController);
+    this.persistance = Container.get(UserMockPersistence);
   }
 
   testControllers() {
-    describe("Test User class", () => {
+    describe("Test User Controller class", () => {
       it("should test user signup", async () => {
         await this.controller.signup(this.req, this.res);
         assert.strictEqual(this.res.statusCode, StatusCodes.CREATED);
@@ -52,7 +48,7 @@ class TestUserClass {
         await this.controller.login(this.req, this.res);
         assert.strictEqual(this.res.statusCode, StatusCodes.OK);
         let responseData = this.res.responseData;
-        assert.strictEqual( responseData._id.length, 36);
+        assert.strictEqual(responseData._id.length, 36);
         this.req.user = responseData._id;
       });
 
@@ -87,6 +83,7 @@ function dependecyInjections() {
     new UserController(Container.get(UserMockPersistence))
   );
 }
-dependecyInjections()
+
+dependecyInjections();
 const testClass = new TestUserClass();
 testClass.testControllers();
