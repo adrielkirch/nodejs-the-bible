@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "npx mocha -r ts-node/register --timeout 10000",
+    "test-folder": "npx mocha -r ts-node/register --recursive --timeout 10000",
     "lint": "eslint . --ext .ts",
     "start": "nodemon --exec ts-node --esm -r tsconfig-paths/register",
     "build": "tsc"

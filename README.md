@@ -20,7 +20,15 @@ To navigate to the TypeScript project directory, run:
 
 This repository is organized into modules, each covering different aspects of Node.js development. Within each module, there are individual lessons that delve into specific topics or concepts related to Node.js. Each lesson is accompanied by its own set of files, which may include code examples, explanations, exercises, quizzes, or other relevant material.
 
-## Install necessary dependecies
+## Install necessary dependecies in JS course
+
+``` cd 1_javascript/ ```
+
+```npm install ```
+
+## Install necessary dependecies in TS course
+
+``` cd 2_typescript/ ```
 
 ```npm install ```
 
@@ -32,13 +40,21 @@ To start the server for a particular lesson, you can use the npm start command f
 
 ``` npm start ./2_module_express/1_lesson_express_introduction/app.js ```
 
-## Test 
+## Single file Test 
 
-To test a file for a particular lesson, you can use the npm start command followed by the path to the actual test, within the desired lesson directory.
+To test a file for a particular lesson, you can use the npm test command followed by the path to the actual test, within the desired lesson directory.
 
 ``` cd 1_javascript/ ```
 
 ```npm run test ./2_module_express/3_lesson_soa_architecture/test.js```
+
+## Multi file Test 
+
+To test a multi files for a particular lesson, you can use the npm test command followed by the path to the actual test, within the desired lesson directory.
+
+``` cd 2_typescript/ ```
+
+``` npm run test ./4_clean_architecture/tests/**/*spec.ts```
 
 ## What is Node.js?
 

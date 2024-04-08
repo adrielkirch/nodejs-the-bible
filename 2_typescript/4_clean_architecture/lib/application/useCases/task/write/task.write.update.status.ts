@@ -15,7 +15,7 @@ export class UpdateStatusUseCaseImpl implements UpdateStatusUseCase {
     }
 
     async execute(id: string, status:Status): Promise<void> {
-    console.log("Status: ",status)
+   
         const existData = await this.taskRepository.read(id);
 
         if (!existData) {
