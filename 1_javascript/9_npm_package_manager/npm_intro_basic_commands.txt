@@ -1,0 +1,48 @@
+npm is the world's largest software registry. Open source developers from every continent use npm to share and borrow packages.
+Many organizations use npm to manage private development as well.
+
+npm consists of three distinct components:
+
+    the website
+    the Command Line Interface (CLI):
+    the registry
+
+Use the website to discover packages, set up profiles, and manage other aspects of your npm experience. For example, you can set up organizations to manage access to public or private packages.
+
+The CLI runs from a terminal, and is how most developers interact with npm.
+
+The registry is a large public database of JavaScript software and the meta-information surrounding it.
+Use npm to . . .
+
+    Adapt packages of code for your apps, or incorporate packages as they are.
+    Download standalone tools you can use right away.
+    Run packages without downloading using npx.
+    Share code with any npm user, anywhere.
+    Restrict code to specific developers.
+    Create organizations to coordinate package maintenance, coding, and developers.
+    Form virtual teams by using organizations.
+    Manage multiple versions of code and code dependencies.
+    Update applications easily when underlying code is updated.
+    Discover multiple ways to solve the same puzzle.
+    Find other developers who are working on similar problems and projects.
+
+
+npm --version: Displays the current version of npm installed on your system.
+
+npm init: Initializes a new Node.js project by creating a package.json file. 
+
+npm install: Installs dependencies listed in the package.json file. By default all --save in dependencies in package.json, but if you may install as development dependencies using --save-dev
+
+npm uninstall: Uninstalls a package from your Node.js project. It removes the package from the node_modules directory and updates the package.json file if the --save flag is used.
+
+npm update: Updates the packages listed in the package.json file to their latest versions. 
+
+npm search: Searches the npm registry for packages matching the specified keywords.
+
+npm list: Lists all installed packages in your project, along with their versions and dependency trees.
+
+npm run: Executes scripts defined in the scripts section of the package.json file. You can use this command to run custom scripts such as build, test, start, etc.
+
+npm publish: Publishes your package to the npm registry, making it available for other developers to install and use.
+
+npm link: Creates a symbolic link between a locally developed package and a project, allowing you to test changes to the package in the project without publishing it to the registry.
