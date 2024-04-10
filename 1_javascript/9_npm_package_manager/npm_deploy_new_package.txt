@@ -1,0 +1,14 @@
+npm config set init-author-name "Adriel Henrique de Mello Kirch"
+npm login
+npm publish --access=public
+npm version patch
+npm outdated
+npm update
+npm version minor
+npm version major
+npm i @adrielkirch/security-basic-tools@latest
+npm i @adrielkirch/security-basic-tools@1.x
+
+https://docs.npmjs.com/about-semantic-versioning
+
+https://docs.npmjs.com/updating-packages-downloaded-from-the-registry

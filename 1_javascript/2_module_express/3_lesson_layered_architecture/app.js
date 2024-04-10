@@ -1,10 +1,8 @@
-
 const dotenv = require("dotenv");
 dotenv.config();
-const mongoose = require('./db/db.mongo');
 const express = require("express");
 const bodyParser = require("body-parser");
-const userRoute = require("./routes/route.user");
+const userRoute = require("./route");
 const swaggerUI = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 const { PORT } = require("./config");
