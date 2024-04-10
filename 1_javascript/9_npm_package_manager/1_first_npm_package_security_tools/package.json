@@ -1,0 +1,11 @@
+{
+  "name": "security-tools",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./test_security_tools.js"
+  },
+  "author": "Adriel Kirch",
+  "license": "MIT"
+}

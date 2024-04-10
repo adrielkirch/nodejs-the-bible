@@ -60,17 +60,17 @@ class SecurityTools {
   static generateHashDigitalSignature() {
     return crypto
       .createHash("sha512")
-      .update(new Date() + this.genRandomBytes(64))
+      .update(new Date() + this.generateRandomBytes(64))
       .digest("hex");
   }
 
   /**
    * Generates a random string of bytes with the specified length.
-   * @param {number} len - The length of the random string to generate, in bytes.
+   * @param {number} size - The size of bytes to generate
    * @returns {string} A hexadecimal representation of the generated random bytes.
    */
-  static generateRandomBytes(len) {
-    const buf = crypto.randomBytes(len);
+  static generateRandomBytes(size) {
+    const buf = crypto.randomBytes(size);
     return buf.toString("hex");
   }
 
