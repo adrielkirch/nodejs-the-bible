@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Layered Architecture",
-    "description": "Implementing a  layered architecture with a fake JSON database to simulate authentication. With all necessary processes to guarantee security, organization, readability, maintainability and test-driven development.",
+    "description": "Implementing a  layered architecture to simulate authentication. With all necessary processes to guarantee security, organization, readability, maintainability and test-driven development.",
     "version": "1.0.0"
   },
   "basePath": "/",

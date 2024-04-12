@@ -10,12 +10,12 @@ const swaggerDocument = require("./swagger.json");
 const { PORT } = require("./config");
 
 /**
- * Lesson Objective: Implementing a  layered architecture with a fake JSON database to simulate authentication.
+ * Lesson Objective: Implementing a  layered architecture with a mysql database to do basic operations.
  * With all necessary processes to guarantee security, organization, readability, maintainability and test-driven development.
  * This async server is built using Express.js, a web application framework for Node.js.
  * It provides a simple and minimalist web server that can handle HTTP requests.
  * @summary Express server for handling HTTP requests and responses.
- * @description This server aims to implement step by step for a Layered architecture with a fake JSON database for simulating authentication.
+ * @description This server aims to implement step by step for a Layered architecture with a mysql database for simulating authentication.
  * @since 1.0.0
  * @see {@link http://localhost:3000/api-docs API Documentation}
  * @returns {Promise<void>} A Promise that resolves when the server has started successfully.
