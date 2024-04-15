@@ -47,7 +47,20 @@
 //   .on("end", (_) => console.log("end"))
 //   .on("close", (_) => console.log("close"));
 
-// Create a big file
+
+//Run server to process a bigfile with:
+
+//1 terminal, create a bigfile
+//node -e "process.stdout.write(crypto.randomBytes(1e9))" > big.file
+
+//2 terminal start the server at 3000
+//node 1_native-stream.js
+
+//3 terminal observe the output.txt being processed
+//curl localhost:3000 -o output.txt
+
+//3 terminal delete big.file and output.txt
+//sudo rm output.txt big.file
 
 
 import { createReadStream, statSync } from "fs";
@@ -71,16 +84,3 @@ createServer((req, res) => {
   stream.pipe(res);
 }).listen(3000, () => console.log("Server running at http://localhost:3000"));
 
-//Run server to process a bigfile with:
-
-//1 terminal
-//node -e "process.stdout.write(crypto.randomBytes(1e9))" > big.file
-
-//1 terminal
-//node native-stream.js
-
-//2 terminal
-//curl localhost:3000 -o output.txt
-
-//delete both big files files
-//sudo rm output.txt big.file
