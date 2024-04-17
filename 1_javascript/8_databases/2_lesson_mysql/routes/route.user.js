@@ -7,7 +7,7 @@ const authMiddleware = require("../middlewares/middleware.auth");
 router.post(
   "/signup",
   [
-    check("email").isEmail().normalizeEmail(),
+    check("email").isEmail(),
     check("name").isString(),
     check("password").isString().isLength({ min: 8 }),
   ],
@@ -16,7 +16,7 @@ router.post(
 
 router.post(
   "/login",
-  [check("email").isEmail().normalizeEmail(), check("password").isString()],
+  [check("email").isEmail(), check("password").isString()],
   userController.login
 );
 

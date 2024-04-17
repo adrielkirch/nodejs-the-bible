@@ -18,7 +18,7 @@ export class UserRouter {
     this.router.post(
       "/signup",
       [
-        check("email").isEmail().normalizeEmail(),
+        check("email").isEmail(),
         check("name").isString(),
         check("password").isString().isLength({ min: 8 }),
       ],
@@ -27,7 +27,7 @@ export class UserRouter {
 
     this.router.post(
       "/login",
-      [check("email").isEmail().normalizeEmail(), check("password").isString()],
+      [check("email").isEmail(), check("password").isString()],
       this.controller.login.bind(this.controller) as (req: Request, res: Response) => Promise<void>
     );
 
