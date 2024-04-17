@@ -1,0 +1,36 @@
+{
+  "name": "@adrielkirch/security-basic-tools",
+  "version": "1.2.0",
+  "description": "A comprehensive library providing a wide range of security-related functions, including UUID generation, JWT handling, data hashing, encryption, HTTP request rate limiting, CORS middleware, and more.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node ./test_security_tools.js"
+  },
+  "author": "Adriel Kirch",
+  "license": "MIT",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "express-rate-limit": "^7.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "uuid": "^9.0.1"
+  },
+  "keywords": [
+    "security",
+    "utilities",
+    "tools",
+    "microservices",
+    "authentication",
+    "authorization",
+    "encryption",
+    "hashing",
+    "JWT",
+    "CORS",
+    "rate limiting",
+    "UUID",
+    "hacking",
+    "hacker",
+    "confiability",
+    "cybersecurity"
+  ]
+}
