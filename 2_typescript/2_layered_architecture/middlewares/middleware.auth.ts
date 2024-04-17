@@ -1,7 +1,7 @@
 import {  Response, NextFunction } from "express";
 import SecurityUtil from "../utils/util.security";
 import { StatusCodes } from "http-status-codes";
-import AuthRequest from "../models/models.auth";
+import AuthRequest from "../models/model.auth";
 
 // Define an interface that extends the Request interface to include the user property
 

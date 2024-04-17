@@ -2,7 +2,7 @@ import express, { Request, Response, Router } from "express";
 import { check } from "express-validator";
 import UserController from "../controllers/controller.user";
 import authMiddleware from "../middlewares/middleware.auth";
-import AuthRequest from "../models/models.auth";
+import AuthRequest from "../models/model.auth";
 
 export class UserRouter {
   public router: Router;
