@@ -48,7 +48,7 @@ pool.connect(async (err, client, release) => {
         }
         return;
       } 
-        console.log("Query executed successfully");
+      console.log("Query executed successfully");
       
     }
   } catch (error) {
