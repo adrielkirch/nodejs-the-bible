@@ -1,12 +1,14 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+const securityUtil = require("../utils/util.security")
 
-console.log(prisma)
+prisma['User'].deleteMany()
 
 async function signup(email, name, password) {
   try {
     const newUser = await prisma.user.create({
       data: {
+        id: securityUtil.generateUUID(), 
         email,
         name,
         password,

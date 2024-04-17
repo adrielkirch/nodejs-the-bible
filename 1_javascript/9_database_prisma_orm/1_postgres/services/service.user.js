@@ -13,7 +13,9 @@ async function signup(email, name, password) {
 
 async function login(email, password) {
   const hashPassword = securityUtil.generateHashWithSalt(password);
+  console.log(email,' ',hashPassword)
   let user = await userRepository.login(email, hashPassword);
+ 
   if (!user) {
     throw new Error("Invalid email or password.");
   }
@@ -28,11 +30,11 @@ async function login(email, password) {
 }
 
 async function getById(id) {
+  console.log(id)
   let user = await userRepository.getById(id);
   if (!user) {
     throw new Error("Invalid Id");
   }
-
   user = securityUtil.removeSensitiveProperty(user, "password");
   return user;
 }
