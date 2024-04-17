@@ -26,7 +26,7 @@ router.delete("/", [authMiddleware], userController.deleteById);
 
 router.put(
   "/",
-  [authMiddleware, check("name").isString()],
+  [authMiddleware, check("name").isString(),],
   userController.update
 );
 

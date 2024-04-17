@@ -1,3 +1,12 @@
+# installation on linux
+    sudo apt update
+    sudo apt install -y mongodb
+    sudo systemctl status mongodb
+    sudo systemctl start mongodb
+    mongo
+
+# Theory
+
 Lesson: Introduction to MongoDB
 
 Welcome to our lesson on MongoDB! In this session, we'll explore the basics of MongoDB, a popular NoSQL database, and its key features. We'll also touch upon some useful resources and URLs to help you dive deeper into MongoDB.

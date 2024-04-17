@@ -1,0 +1,58 @@
+# Installation
+sudo apt update
+sudo apt install postgresql
+sudo systemctl status postgresql
+
+sudo -i -u postgres  # Log in as the postgres user
+psql                 # Enter the PostgreSQL interactive terminal
+
+# Inside psql terminal
+\l                   # List databases
+ALTER USER postgres PASSWORD 'postgres';  # Change password for the postgres user
+CREATE DATABASE development;   # Create development database
+
+\q                   # Exit the PostgreSQL interactive terminal
+exit                 # Exit the postgres user session
+
+# Theory
+
+    Class: 
+        PostgreSQL and Relational Database Management Systems (RDBMS)
+    
+    Overview:
+
+        PostgreSQL is a powerful open-source Relational Database Management System (RDBMS) known for its reliability, robustness, and advanced features.
+        It operates using Structured Query Language (SQL) to manage and manipulate data, providing a scalable and efficient solution for various applications.
+
+    Definition:
+
+        PostgreSQL, often referred to as "Postgres," is an advanced relational database management system (RDBMS) that organizes data into tables, with each table consisting of rows and columns. 
+        It utilizes SQL as its primary query language for interacting with the database.
+
+    Components:
+
+        Relational Database Management System (RDBMS):
+            PostgreSQL is a type of RDBMS, which means it organizes data into structured tables with predefined relationships between them.
+
+        Structured Query Language (SQL):
+            SQL is a standardized language used to communicate with relational databases like PostgreSQL. It enables users to perform various operations such as querying data, inserting, updating, and deleting records, creating and modifying tables, and managing database permissions.
+
+        Tables:
+            Data in PostgreSQL is stored in tables, which are organized into rows and columns. Each row represents a single record, while each column represents a specific attribute of the record.
+
+        Queries:
+            SQL queries are used to retrieve, manipulate, and manage data stored in PostgreSQL databases. Queries can range from simple ones like SELECT statements to complex ones involving JOINs and conditional clauses.
+
+        Indexes:
+            Indexes are data structures used to optimize query performance by providing fast access to data. They are created on columns in tables and help PostgreSQL quickly locate and retrieve records.
+
+        Transactions:
+            PostgreSQL supports transactions, which allow multiple SQL statements to be executed as a single unit of work. Transactions ensure data consistency and integrity by either committing or rolling back changes based on their success or failure.
+
+        Data Types:
+            PostgreSQL supports various data types such as integers, strings, dates, and more. Each data type specifies the kind of data that can be stored in a column.
+
+        User Management:
+            PostgreSQL allows administrators to create and manage users, assign privileges and permissions, and control access to databases and tables.
+
+

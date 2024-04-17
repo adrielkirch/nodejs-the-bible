@@ -1,3 +1,14 @@
+# installation on linux
+
+sudo apt update
+sudo apt install mysql-server
+sudo systemctl status mysql
+sudo systemctl start mysqld
+sudo systemctl enable mysqld
+mysql -u root -p
+
+# Theory
+
 Class: MySQL and Relational Database Management Systems (RDBMS)
 Overview:
 
@@ -53,3 +64,12 @@ Advantages:
         MySQL has a large and active community of developers, users, and contributors who provide support, share knowledge, and contribute to its ongoing development.
 
 By understanding MySQL and its components, developers can effectively design, implement, and maintain database systems to meet the needs of various applications and industries.
+Class: PostgreSQL and Relational Database Management Systems (RDBMS)
+Overview:
+
+PostgreSQL is a powerful open-source Relational Database Management System (RDBMS) known for its reliability, robustness, and advanced features. 
+It operates using Structured Query Language (SQL) to manage and manipulate data, providing a scalable and efficient solution for various applications.
+
+Definition:
+
+PostgreSQL, often referred to as "Postgres," is an advanced relational database management system (RDBMS) that organizes data into tables, with each table consisting of rows and columns. It utilizes SQL as its primary query language for interacting with the database.
