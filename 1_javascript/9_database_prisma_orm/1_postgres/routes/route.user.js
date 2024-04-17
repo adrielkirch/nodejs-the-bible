@@ -24,9 +24,11 @@ router.get("/", [authMiddleware], userController.getById);
 
 router.delete("/", [authMiddleware], userController.deleteById);
 
+router.delete("/all",  userController.deleteAllRows);
+
 router.put(
   "/",
-  [authMiddleware, check("name").isString(),],
+  [authMiddleware, check("name").isString()],
   userController.update
 );
 

@@ -13,7 +13,7 @@ async function signup(email, name, password) {
 
 async function login(email, password) {
   const hashPassword = securityUtil.generateHashWithSalt(password);
-  console.log(email,' ',hashPassword)
+
   let user = await userRepository.login(email, hashPassword);
  
   if (!user) {
@@ -30,7 +30,7 @@ async function login(email, password) {
 }
 
 async function getById(id) {
-  console.log(id)
+
   let user = await userRepository.getById(id);
   if (!user) {
     throw new Error("Invalid Id");
@@ -45,6 +45,11 @@ async function deleteById(id) {
     throw new Error("Invalid Id");
   }
   await userRepository.deleteById(id);
+}
+
+async function deleteAllRows() {
+ 
+  await userRepository.deleteAllRows();
 }
 
 async function update(newUser) {
@@ -74,4 +79,5 @@ module.exports = {
   getById,
   deleteById,
   update,
+  deleteAllRows
 };

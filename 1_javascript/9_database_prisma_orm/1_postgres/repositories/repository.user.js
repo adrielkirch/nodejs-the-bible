@@ -2,7 +2,7 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const securityUtil = require("../utils/util.security")
 
-prisma['User'].deleteMany()
+
 
 async function signup(email, name, password) {
   try {
@@ -21,6 +21,18 @@ async function signup(email, name, password) {
     throw error;
   }
 }
+
+async function deleteAllRows() {
+  try {
+    const collectionName = "User";
+    await prisma[collectionName].deleteMany({});
+    console.log(`All rows in ${collectionName} have been deleted.`);
+  } catch (error) {
+    console.error(`Error occurred while deleting rows from ${collectionName}:`, error);
+    throw error;
+  }
+}
+
 
 async function login(email, password) {
   try {
@@ -106,4 +118,5 @@ module.exports = {
   deleteById,
   getByFieldValue,
   update,
+  deleteAllRows
 };

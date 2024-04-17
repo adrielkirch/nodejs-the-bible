@@ -61,6 +61,19 @@ async function deleteById(req, res) {
       .json({ error: error.message });
   }
 }
+
+async function deleteAllRows(req, res) {
+  try {
+    await userService.deleteAllRows();
+    res.status(StatusCodes.NO_CONTENT).json({});
+  } catch (error) {
+    console.error(error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: error.message });
+  }
+}
+
 async function update(req, res) {
   try {
     const { name, password } = req.body;
@@ -86,4 +99,5 @@ module.exports = {
   getById,
   deleteById,
   update,
+  deleteAllRows
 };
