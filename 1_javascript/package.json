@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@adrielkirch/security-basic-tools": "^1.2.0",
+    "@prisma/client": "^5.12.1",
     "body-parser": "^1.20.2",
     "chalk": "^4.1.2",
     "cors": "^2.8.5",
