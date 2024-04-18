@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+// Define the NoteService service
+service NoteService {
+    rpc List (Empty) returns (NoteList) {}
+    rpc GetItem (NoteId) returns (Note) {}
+    rpc DeleteItem (NoteId) returns (Note) {}
+    rpc SetItem (Note) returns (Note) {}
+
+}
+
+// Define an empty message
+message Empty {}
+
+// Define a message to hold a note ID
+message NoteId {
+    string id = 1;
+}
+
+// Define the structure of a note
+message Note {
+    string id = 1;
+    string title = 2;
+    string content = 3;
+}
+
+// Define a message to hold a list of notes
+message NoteList {
+    repeated Note notes = 1;
+}
