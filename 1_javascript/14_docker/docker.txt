@@ -1,0 +1,64 @@
+What is Docker?
+
+Docker is an open-source platform used to automate the deployment, scaling, and management of applications within isolated environments called containers. 
+These containers package up everything an application needs to run, including the code, runtime, system tools, and libraries, ensuring consistency and portability across different computing environments.
+
+Why Use Docker?
+
+    Consistency: Docker ensures that your application runs the same way on any environment, be it your local machine, a development server, or in the cloud.
+
+    Isolation: Containers encapsulate applications and their dependencies, providing a lightweight, isolated environment. This isolation prevents conflicts between applications and ensures that changes made to one container do not affect others.
+
+    Efficiency: Docker containers are lightweight and share the host system's kernel, making them much more resource-efficient than traditional virtual machines.
+
+    Scalability: Docker allows for easy scaling of applications by running multiple instances of containers, making it simple to handle increased loads.
+
+    Portability: Docker containers can be easily moved between different environments, simplifying the process of deploying applications across various platforms.
+
+Advantages of Using Containers
+
+    Resource Efficiency: Containers share the host OS kernel, reducing overhead and making better use of system resources compared to virtual machines.
+
+    Faster Deployment: Containers can be started and stopped quickly, enabling rapid deployment and updates of applications.
+
+    Isolation: Each container provides a separate environment for applications, ensuring that they do not interfere with each other.
+
+    Consistency: Containers package all dependencies with the application, ensuring consistent behavior across different environments.
+
+    Version Control: Docker images serve as blueprints for containers, allowing for easy versioning and rollback of application components.
+
+Dockerfile
+
+A Dockerfile is a text document that contains instructions for building a Docker image. It specifies the base image to use, along with commands to install dependencies, copy files, configure the environment, and define runtime settings. Dockerfiles provide a reproducible and automated way to create consistent Docker images, making it easy to share and deploy applications.
+Docker Compose
+
+Docker Compose is a tool for defining and running multi-container Docker applications. It uses a YAML file (docker-compose.yml) to define the services, networks, and volumes required by the application. Docker Compose simplifies the process of managing complex, multi-container applications by allowing you to define and run them with a single command. It is particularly useful for development and testing environments where multiple services need to be orchestrated together.
+
+    docker ps:
+        docker ps command lists all running containers.
+        With the -a flag, it lists all containers (both running and stopped).
+
+
+    docker-compose up --build:
+        This command is used to create and start Docker containers defined in a docker-compose.yml file.
+        The --build flag ensures that Docker Compose rebuilds images before starting containers.
+
+    docker stop <containerId>:
+        docker stop command is used to stop a running container by its ID or name.
+        It sends the SIGTERM signal to the container, allowing it to gracefully shut down.
+
+    docker rm <containerId>:
+        docker rm command removes one or more stopped containers.
+        It accepts either container names or IDs as arguments.
+        Use the -f flag to force removal of a running container (not recommended unless necessary).
+
+    docker rmi images:
+        docker rmi command removes one or more Docker images.
+        It accepts image IDs or names as arguments.
+        If an image is being used by a running container, you need to stop and remove the container first or use the -f flag to force removal.
+    
+    docker system prune -a -f --volumes:
+        docker system prune command is used to remove unused data such as containers, images, volumes, and networks.
+        The -a flag removes all unused images, not just dangling ones.
+        The -f flag (or --force) is used to avoid the confirmation prompt.
+        The --volumes flag removes all volumes not used by at least one container.

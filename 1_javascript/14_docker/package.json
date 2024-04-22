@@ -1,0 +1,30 @@
+{
+  "name": "14_docker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "doc:dev:up": "docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build",
+    "doc:stagging:up": "docker compose -f docker-compose.yml -f docker-compose.stagging.yml up -d --build",
+    "doc:prod:up": "docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build",
+    "doc:dev:down": "docker compose -f docker-compose.yml -f docker-compose.dev.yml down",
+    "doc:stagging:down": "docker compose -f docker-compose.yml -f docker-compose.stagging.yml down",
+    "doc:prod:down": "docker compose -f docker-compose.yml -f docker-compose.prod.yml down",
+    "logs":"docker logs -f 14_docker-docker-api-1",
+    "doc:prune": "docker system prune -a -f --volumes",
+    "dev": "nodemon -L ./src/app.js",
+    "stagging": "nodemon -L ./src/app.js --stagging",
+    "prod": "node ./src/app.js  --production",
+    "start": "node ./src/app.js --development",
+    "test": "echo \"Error: no test specified\" && exit 1"
+
+  },
+  "author": "Adriel Henrique de Mello Kirch",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "nodemon": "^3.1.0"
+  }
+}
