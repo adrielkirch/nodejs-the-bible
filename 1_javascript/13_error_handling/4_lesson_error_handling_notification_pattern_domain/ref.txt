@@ -1,0 +1,5 @@
+https://medium.com/tableless/n%C3%A3o-lance-exceptions-em-seu-dom%C3%ADnio-use-notifications-70b31f7148d3
+
+https://martinfowler.com/articles/replaceThrowWithNotification.html
+
+https://martinfowler.com/eaaDev/Notification.html
