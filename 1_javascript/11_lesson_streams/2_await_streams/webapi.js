@@ -1,10 +1,8 @@
-import http from "http";
-import { Readable } from "stream";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
+const http = require("http");
+const { Readable } = require("stream");
+const { fileURLToPath } = require("url");
+const { dirname } = require("path");
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 function runApi(apiFunction, port) {
   http.createServer(apiFunction).listen(port, () =>

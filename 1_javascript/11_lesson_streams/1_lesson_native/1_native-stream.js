@@ -47,7 +47,6 @@
 //   .on("end", (_) => console.log("end"))
 //   .on("close", (_) => console.log("close"));
 
-
 //Run server to process a bigfile with:
 
 //1 terminal, create a bigfile
@@ -62,9 +61,8 @@
 //3 terminal delete big.file and output.txt
 //sudo rm output.txt big.file
 
-
-import { createReadStream, statSync } from "fs";
-import { createServer } from "http";
+const { createReadStream, statSync } = require("fs");
+const { createServer } = require("http");
 
 createServer((req, res) => {
   const stream = createReadStream("big.file");
@@ -83,4 +81,3 @@ createServer((req, res) => {
 
   stream.pipe(res);
 }).listen(3000, () => console.log("Server running at http://localhost:3000"));
-

@@ -1,5 +1,5 @@
 const grpc = require("grpc");
-const notesProto = grpc.load("notes.proto");
+const notesProto = grpc.load( __dirname + "/notes.proto");
 
 const notes = [
   { id: "1", title: "Note 1", content: "Content 1" },

@@ -1,8 +1,9 @@
-import { stdout } from "process";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
-import { Readable, Writable, Transform } from "stream";
-import { createWriteStream } from "fs";
+const { stdout } = require("process");
+const { fileURLToPath } = require("url");
+const { dirname } = require("path");
+const { Readable, Writable, Transform } = require("stream");
+const { createWriteStream } = require("fs");
+
 // Create a readable stream as the source of data
 const totalRows = 1e6
 const readable = Readable({
@@ -64,9 +65,6 @@ const writable = Writable({
 // Alternatively, you can pipe the readable stream directly to a destination, like process.stdout
 // readable.pipe(process.stdout);
 
-// Pipe the readable stream to the  transform then, writable stream
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 const pipeline = readable
   .pipe(mapFields)

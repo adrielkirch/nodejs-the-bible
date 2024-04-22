@@ -1,4 +1,4 @@
-import { Duplex, Transform } from "stream";
+const { Duplex, Transform } = require("stream");
 
 let count = 0;
 /**

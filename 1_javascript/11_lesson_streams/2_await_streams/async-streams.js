@@ -30,8 +30,8 @@
  * - Process Completion:
  *   - After the pipeline has completed, the "Process has finished!" message is logged.
  */
-import { setTimeout } from "timers/promises";
-import { pipeline } from "stream/promises";
+const { setTimeout } = require("timers/promises");
+const { pipeline } = require("stream/promises");
 
 /**
  * Asynchronous Readable Stream
@@ -101,19 +101,23 @@ async function* myCustomIterableWritable(stream) {
   }
 }
 
-try {
-  const controller = new AbortController();
-  setImmediate(() => {
-    controller.abort();
-  });
-  await pipeline(
-    myCustomIterableReadable,
-    myCustomIterableTransform,
-    myCustomIterableDuplex,
-    myCustomIterableWritable,
-    { signal: controller.signal }
-  );
-  console.log("Process has finished!");
-} catch (error) {
-  console.error("\nAbort", error.message);
-}
+const process = async () => {
+  try {
+    const controller = new AbortController();
+    setImmediate(() => {
+      controller.abort();
+    });
+    await pipeline(
+      myCustomIterableReadable,
+      myCustomIterableTransform,
+      myCustomIterableDuplex,
+      myCustomIterableWritable,
+      { signal: controller.signal }
+    );
+    console.log("Process has finished!");
+  } catch (error) {
+    console.error("\nAbort", error.message);
+  }
+};
+
+process()

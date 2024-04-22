@@ -1,31 +1,36 @@
-import { Writable, PassThrough } from "stream";
-import axios from "axios";
+const { Writable, PassThrough } = require("stream");
+const axios = require("axios");
 
 const API_01 = "http://localhost:3000";
 const API_02 = "http://localhost:4000";
 
-const requests = await Promise.all([
-  axios({
-    method: "get",
-    url: API_01,
-    responseType: "stream",
-  }),
-  axios({
-    method: "get",
-    url: API_02,
-    responseType: "stream",
-  }),
-]);
+const requests = async () => {
+  const requests = await Promise.all([
+    axios({
+      method: "get",
+      url: API_01,
+      responseType: "stream",
+    }),
+    axios({
+      method: "get",
+      url: API_02,
+      responseType: "stream",
+    }),
+  ]);
 
-const results = requests.map(({ data }) => data);
-const output = Writable({
-  write(chunk, encoding, callback) {
-    const data = chunk.toString();
-    console.log(data);
-    callback();
-  },
-});
+  const results = requests.map(({ data }) => data);
+  const output = Writable({
+    write(chunk, encoding, callback) {
+      const data = chunk.toString();
+      console.log(data);
+      callback();
+    },
+  });
+  // results[0].pipe(output);
+  // results[1].pipe(output);
 
+  merge(results).pipe(output);
+};
 //Goal is concat these strings
 function merge(streams) {
   const mergedStream = new PassThrough();
@@ -37,8 +42,8 @@ function merge(streams) {
     // When the current stream ends, check if all streams have ended
     stream.on("end", () => {
       // Check if all streams have ended
-      const allEnded = streams.every(s => s === stream || s.ended);
-      
+      const allEnded = streams.every((s) => s === stream || s.ended);
+
       if (allEnded) {
         // If all streams have ended, end the merged stream
         mergedStream.end();
@@ -54,7 +59,4 @@ function merge(streams) {
   return mergedStream;
 }
 
-merge(results).pipe(output)
-
-// results[0].pipe(output);
-// results[1].pipe(output);
+requests();
