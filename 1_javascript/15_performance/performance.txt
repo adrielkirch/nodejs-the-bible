@@ -1,0 +1,42 @@
+Static Code Analysis (QA):
+    Evaluation of source code quality without executing it.
+    Tools such as linters, static code analyzers, and automated inspections.
+    Identifies potential problems such as coding bad practices, style violations, logic bugs, etc.
+    Helps maintain consistent coding standards and avoid common errors.
+
+Dynamic Code Analysis (Performance):
+    Monitoring and identification of performance issues during code execution.
+    Use of profiling tools such as APM Node.js, Autocannon, 0x
+    Detects performance bottlenecks, memory leaks, excessive resource consumption, among others.
+    Allows optimizing code performance and ensuring a smoother user experience.
+
+External Connections Analysis:
+    Evaluation of integration with external systems, such as APIs and databases.
+    Verification of security, reliability, and efficiency of connections.
+    May include load and stress testing to simulate behavior under extreme conditions.
+    Ensures that the application functions consistently and effectively in its production environment.
+
+Documentation / Report:
+    Detailed documentation of all analyses performed and their results.
+    Reports that highlight identified problems, their causes, and possible solutions.
+    Records of performance metrics and quality standards over time.
+    Facilitates communication between teams and helps in decision-making regarding improvements and corrections.
+
+Suggestions for Improvement and/or Implementation:
+    Recommendations for addressing identified issues in static and dynamic analyses.
+    Suggestions for performance optimization, code refactoring, and enhancement of integration with external systems.
+    Prioritization of improvements based on the severity of issues and the potential impact on users and the system as a whole.
+
+Observability suggestion combo:
+
+    Prometheus: As mentioned earlier, Prometheus is a powerful time-series database and monitoring system. 
+    It excels at collecting and storing metrics from various sources, including your application, system metrics, and any other services you're using. 
+    Prometheus provides powerful querying capabilities with PromQL, allowing you to analyze and visualize your data effectively.
+
+    OpenTelemetry: OpenTelemetry is a set of open-source APIs, libraries, agents, and instrumentation to provide observability for cloud-native software.
+    It allows you to instrument your code to collect telemetry data such as traces, metrics, and logs. 
+    By integrating OpenTelemetry with your applications, you can gain insights into their performance and behavior in real-time.
+
+     Grafana: Grafana is a popular open-source platform for monitoring and observability. 
+    It integrates seamlessly with Prometheus and provides a rich set of visualization options, including graphs, charts, and dashboards. 
+    Grafana allows you to create customized dashboards to visualize performance metrics and trends, making it easier to identify issues and optimize your system's performance.
