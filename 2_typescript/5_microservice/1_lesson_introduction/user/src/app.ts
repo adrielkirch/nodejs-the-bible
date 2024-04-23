@@ -7,7 +7,6 @@ import { PORT } from "./config";
 import MongoDb from "./db/db.mongo";
 
 
-
 async function startServer(): Promise<void> {
   const userRouter: UserRouter = new UserRouter();
   const app = express();

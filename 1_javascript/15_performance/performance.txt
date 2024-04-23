@@ -6,7 +6,7 @@ Static Code Analysis (QA):
 
 Dynamic Code Analysis (Performance):
     Monitoring and identification of performance issues during code execution.
-    Use of profiling tools such as APM Node.js, Autocannon, 0x
+    Use of profiling tools such as benchmark, APM Node.js, Autocannon, 0x
     Detects performance bottlenecks, memory leaks, excessive resource consumption, among others.
     Allows optimizing code performance and ensuring a smoother user experience.
 
