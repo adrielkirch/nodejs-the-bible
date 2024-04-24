@@ -1,16 +1,20 @@
+# Use the official Node.js 19 image as base
 FROM node:19
 
-# Add package file
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
-# Install deps
-RUN npm i
+# Install dependencies
+RUN npm install
 
-# Copy source
+# Copy the rest of the application code
 COPY . .
 
-
-# Expose port 3000
+# Expose the port the app runs on
 EXPOSE 3000
 
-CMD ["npm", "run", "dev"]
+# Command to run the application
+CMD ["npx", "nodemon", "-L", "./src/app.ts"]

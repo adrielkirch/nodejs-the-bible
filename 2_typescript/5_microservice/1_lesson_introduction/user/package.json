@@ -1,12 +1,12 @@
 {
-  "name": "5_microservice",
+  "name": "user_microservice",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --exec ts-node --esm -r tsconfig-paths/register ./src/app.ts",
-    "doc:dev:up": "docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build",
-    "doc:dev:down": "docker compose -f docker-compose.yml -f docker-compose.dev.yml down"
+    "docker:up": "docker compose up --build",
+    "docker:down": "docker compose down"
   },
 
   "dependencies": {

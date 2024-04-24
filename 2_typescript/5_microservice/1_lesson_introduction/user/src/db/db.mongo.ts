@@ -1,5 +1,5 @@
 import mongoose, { Connection } from "mongoose";
-import {NODE_ENV,MONGO_URI} from "../config"
+import {MONGO_URI} from "../config";
 
 interface CustomConnectOptions extends mongoose.ConnectOptions {
   bufferCommands?: boolean;
@@ -15,7 +15,7 @@ class Mongodb {
   private dbName: string | undefined;
   constructor() {
     this.db = undefined;
-    this.dbName = NODE_ENV;
+    this.dbName = process.env.NODE_ENV;
     this.connect();
   }
 
@@ -24,14 +24,14 @@ class Mongodb {
       return this.db;
     }
 
-    const url = MONGO_URI;
+
 
     const options: CustomConnectOptions = {
       bufferCommands: false,
       dbName: this.dbName,
     };
 
-    const connection = await mongoose.connect(url, options);
+    const connection = await mongoose.connect(MONGO_URI, options);
 
     this.db = mongoose.connection;
     return this.db;
@@ -40,6 +40,7 @@ class Mongodb {
   async getInstance(): Promise<Connection> {
     if (!this.db) {
       await this.connect();
+      console.error("Connected to MongoDB successfully !");
     }
 
     if (!this.db) {

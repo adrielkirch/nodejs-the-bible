@@ -1,5 +1,5 @@
-# Use the official Node.js 18 image as base
-FROM node:18
+# Use the official Node.js 19 image as base
+FROM node:19
 
 # Set the working directory in the container
 WORKDIR /app
@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 3000
 
 # Command to run the application
-CMD ["npx", "nodemon", "-L", "./src/app.js"]
+CMD ["npx", "nodemon", "-L", "--exec", "ts-node", "--esm", "-r", "tsconfig-paths/register"]

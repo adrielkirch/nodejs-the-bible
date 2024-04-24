@@ -1,20 +1,31 @@
 version: '3'
 
 services:
-  api-server:
+  app:
     build: .
-    stdin_open: true
-    tty: true
-    container_name: api-server
-    image: api-server
-    restart: unless-stopped
-    volumes:
-      - ./logs:/logs
-    networks:
-      - app-network
     ports:
-      - '3000:3000'
+      - "3000:3000"
+    volumes:
+      - .:/app
+    depends_on:
+      - mongodb
+    env_file:
+      - .env
+    networks:
+      - api-network
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - api-network
 
 networks:
-  app-network:
-    driver: bridge
+  api-network:
+
+volumes:
+  mongodb_data:
