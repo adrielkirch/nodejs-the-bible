@@ -1,9 +1,25 @@
 version: '3'
+
 services:
-  docker-api:
+  app:
     build: .
-    stdin_open: true
-    tty: true
     ports:
-      - '9000:9000'
-   
+      - "3000:3000"
+    volumes:
+      - .:/app
+    depends_on:
+      - mongodb
+    env_file:
+      - .env
+
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      #cd /var/lib/docker/volumes
+      #docker volume rm 14_docker_mongodb_data
+      - mongodb_data:/data/db 
+
+volumes:
+  mongodb_data:

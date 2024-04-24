@@ -1,33 +1,49 @@
+const dotenv = require("dotenv");
+dotenv.config();
 const express = require("express");
+const mongoose = require("./db");
 
-function setEnvByCommandLineParam() {
-  if (!process.argv.length) {
-    return;
-  }
-  console.log(`${__dirname}/../.env.development`);
-  let env = process.argv[2];
-
-  if (env == "--stagging") {
-    require("dotenv").config({ path: `${__dirname}/../.env.stagging` });
-  } else if (env == "--production") {
-    require("dotenv").config({ path: `${__dirname}/../.env.production` });
-  } else {
-    require("dotenv").config({ path: `${__dirname}/../.env.development` });
-  }
-}
-
+const Task = require("./task");
 // Create an Express application
 const app = express();
 
 // Define port number
 const PORT = process.env.PORT || 3000;
-
-//Set env file
-setEnvByCommandLineParam();
-
+app.use(express.json());
 // Define route handler for the root endpoint
 app.get("/", (req, res) => {
   res.status(200).send(`Hello, you are in ${process.env.NODE_ENV} environment`);
+});
+
+/**
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"title": "Task Title", "description": "Task Description"}' \
+  http://localhost:3000/task
+ */
+app.post("/task", async (req, res) => {
+  try {
+    const newTask = new Task({
+      title: req.body.title,
+      description: req.body.description,
+    });
+    await newTask.save();
+    res.status(201).json(newTask);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Couldn't save model" });
+  }
+});
+
+// curl http://localhost:3000/task
+app.get("/task", async (req, res) => {
+  try {
+    const tasks = await Task.find();
+    res.status(200).json(tasks);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Couldn't fetch tasks" });
+  }
 });
 
 // Define route handler for all other endpoints
