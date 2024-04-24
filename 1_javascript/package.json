@@ -44,6 +44,8 @@
   },
   "devDependencies": {
     "@types/mocha": "^10.0.6",
+    "0x": "^4.1.4",
+    "autocannon": "^7.15.0",
     "chai": "^5.1.0",
     "mocha": "^10.3.0",
     "nodemon": "^3.1.0",

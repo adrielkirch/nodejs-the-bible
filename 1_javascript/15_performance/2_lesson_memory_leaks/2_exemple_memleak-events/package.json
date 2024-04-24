@@ -1,0 +1,22 @@
+{
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "CLIMEM=8999 node -r climem index.js",
+    "climem": "npx climem 8999",
+    "test": "npx autocannon -c 100 -d 30 -p 10 http://localhost:3000",
+    "flame-0x": "npx 0x -- node index.js",
+    "clinic-doctor": "npx clinic doctor -- node index.js",
+    "clinic-flame": "npx clinic flame -- node index.js",
+    "clinic-heapprofiler": "npx clinic heapprofiler -- node index.js"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "devDependencies": {
+    "autocannon": "^7.12.0",
+    "climem": "^1.0.3",
+    "clinic": "^13.0.0"
+  }
+}

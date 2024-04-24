@@ -1,0 +1,16 @@
+$ node 
+$ process.memoryUsage()
+{
+  rss: 40869888,
+  heapTotal: 6725632,
+  heapUsed: 5468568,
+  external: 914623,
+  arrayBuffers: 11176
+}
+
+$ lsof -i :3000
+
+clinic doctor       => mostra se tem algum problema, o que você pode fazer para resolver
+clinic bubbleprof   => saber em nível de conexões, saber se tem algum banco de dados ou algum API que está atrasando o lado da aplicação
+clinic flame        => parecido com o 0x
+clinic heapprofiler => fazer a análise da memória da aplicação
