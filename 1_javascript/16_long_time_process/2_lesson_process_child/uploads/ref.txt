@@ -1,0 +1,1 @@
+$ python3 index.py '{"filePath": "my-data.csv", "url": "http://localhost:3000"}'
