@@ -165,6 +165,7 @@ const director = new Director("John", "Brazil", "062451723"); // Object instanti
 
 /**
  * The prototype chain is a concept in JavaScript that helps objects inherit properties and methods from other objects.
+ * It also a simple away to do a prototype design pattern
  */
 
 // Director's prototype should be Employee
@@ -175,3 +176,13 @@ console.assert(Employee.prototype.__proto__ === Person.prototype, 'Employee prot
 
 // Student's prototype should be Person
 console.assert(Student.prototype.__proto__ === Person.prototype, 'Student prototype should be Person');
+
+// Create the director_high_school object with Director.prototype as its prototype
+const director_high_school = Object.create(Director.prototype);
+
+// Add a new field to director_high_school
+director_high_school.favoriteSubject = "Math";
+
+// Test assertion
+console.assert(director_high_school.__proto__ === Director.prototype, 'director_high_school prototype should be Director');
+
