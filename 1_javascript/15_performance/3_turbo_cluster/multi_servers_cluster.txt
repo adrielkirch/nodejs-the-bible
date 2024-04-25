@@ -1,0 +1,26 @@
+Node.js works in single-threaded, non-blocking performance, working as a single process in CPU. 
+No matter how powerful server is used and the resources utilized, what a single-threaded process can do is limited. 
+Node.js is designed for building distributed applications with multiple nodes, hence the name Node.js.
+
+Workload is one of the main reasons we start scaling our application, including availability and fault tolerance among others. 
+Scaling can be done in multiple ways, one of the easiest available solution is Cloning. 
+We can perform cloning using Cluster Module provided by Node.js.
+
+How Cluster Module Works?
+
+The cluster module has got two types of processes, Master and Worker. 
+All incoming requests are handled by Master process and Master process decides which Worker should handle the incoming requests.
+Worker process can be thought of as normal Node.Js single instance server which serves the requests.
+
+How does Master process distribute the incoming connections?
+
+The first method is the round-robin approach, where the master process listens on a port, accepts new connections, and distributes them across the workers in a round-robin fashion. With some built-in smarts to avoid overloading a worker process.
+The second approach should, in theory, give the best performance. In practice, however, distribution tends to be very unbalanced due to operating system scheduler vagaries. Loads have been observed where over 70% of all connections ended up in just two processes, out of a total of eight.
+
+Load balancing:
+
+In the context of Node.js clustering, load balancing refers to the strategic distribution of incoming requests among multiple worker processes. 
+This ensures optimal resource utilization and prevents any single worker from being overwhelmed. 
+By using load balancing in conjunction with Node.js clustering, you can achieve greater scalability, fault tolerance, and efficient handling of workload across the available processing units.
+
+Read more: https://bhattaraib58.medium.com/make-nodejs-handle-5x-request-with-99-9-uptime-adding-10-lines-of-code-e264006d35cf
