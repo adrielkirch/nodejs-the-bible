@@ -1,0 +1,27 @@
+{
+  "name": "watermark-copyright-issues",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node views/upload-video.js"
+  },
+  "keywords": [],
+  
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "ffmpeg": "^0.0.4",
+    "hbs": "^4.2.0",
+    "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.22.10",
+    "@babel/core": "^7.22.11",
+    "@babel/node": "^7.22.10",
+    "@babel/preset-env": "^7.22.14",
+    "dotenv": "^16.3.1",
+    "nodemon": "^3.0.1"
+  }
+}

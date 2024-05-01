@@ -1,0 +1,17 @@
+{
+    "name": "nodejs-the-bible",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+      "start": "nodemon",
+      "test": "npx mocha -w --parallel"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "csvtojson": "^2.0.10"
+    }
+  }
+  

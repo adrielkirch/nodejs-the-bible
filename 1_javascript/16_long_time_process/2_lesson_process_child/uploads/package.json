@@ -1,5 +1,5 @@
 {
-  "name": "@yvesguilherme/uploads",
+  "name": "uploads",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,6 +8,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Yves Guilherme Lopo R. Lima",
+  
   "license": "ISC"
 }

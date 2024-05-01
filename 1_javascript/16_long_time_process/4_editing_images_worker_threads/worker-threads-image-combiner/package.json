@@ -1,0 +1,21 @@
+{
+  "name": "worker-threads-image-combiner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": [],
+  
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "piscina": "^4.1.0",
+    "sharp": "^0.29.3"
+  },
+  "devDependencies": {
+    "autocannon": "^7.12.0"
+  }
+}
