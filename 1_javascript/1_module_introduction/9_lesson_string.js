@@ -64,6 +64,9 @@ console.log("Replaced:", text.replace("world", "universe"));
 // split(): Splits a string into an array of substrings based on a specified separator.
 console.log("Split:", text.split(",")); // Output: ["Hello", " world!"]
 
+// split(): Splits also may be used to transform a string into array
+console.log("Split array:", text.split("")); // Output: ["Hello", " world!"]
+
 
 // trim(): Removes whitespace from both ends of a string.
 let paddedText = "   Hello, world!   ";
