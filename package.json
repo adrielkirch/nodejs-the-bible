@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "benchmark": "^2.1.4"
-  },
-  "devDependencies": {
-    "autocannon": "^7.15.0",
-    "climem": "^2.0.0"
-  }
-}
