@@ -20,6 +20,7 @@ class SecurityTools {
    * Generates a JSON Web Token (JWT) for the specified user ID using the provided secret key.
    * @param {string|number} userId - The ID of the user for whom the JWT is being generated.
    * @param {string} secretJwtKey - The secret key used for signing the JWT.
+   * @param {number} days - Number of days to expire JWT token.
    * @returns {string} A string representing the generated JWT.
    */
   static generateJwt(userId, secretJwtKey, days) {
@@ -204,6 +205,5 @@ class SecurityTools {
     return data;
   }
 }
-
 
 module.exports = SecurityTools;
