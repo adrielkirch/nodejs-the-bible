@@ -27,13 +27,13 @@ async function startServer() {
   app.use("/fleet", fleetRoute);
   const server = http.createServer(app);
   const ws = new WebSocket(server); 
-  await app.listen(PORT + 1);
+  await app.listen(PORT);
   const kafkaInstance = new KafkaSingleton();
   await kafkaInstance.init();
 
   console.log(`Server is running on port ${PORT}`);
 
-  server.listen(PORT, () => {
+  server.listen(PORT + 1, () => {
     console.log(`Service socket is listening on ${PORT + 1}`);
   });
   

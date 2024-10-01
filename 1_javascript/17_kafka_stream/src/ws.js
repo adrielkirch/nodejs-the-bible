@@ -4,7 +4,7 @@ const dateUtil = require("./dateUtil");
 const { KafkaSingleton } = require("./kafka");
 
 /**
- * This websocket aims to create multiple online company fleet real time observing, where each room can have (1,N) clients that may communicate with only that specific group room, each group room is related to a companyId
+ * This websocket aims to create multiple online company fleet real time observing, where each room can have (1,N) clients that may communicate with only that specific group room, each group room is related to a roomId
  */
 
 /**
@@ -31,6 +31,9 @@ class WebSocket {
        */
       this.rooms = new Map();
 
+      // Initialize Kafka consumer
+      this.initKafkaConsumer();
+
       // Event handler for incoming connections
       this.wss.on("connection", (ws, req) => {
         const url = new URL(req.url, `http://${req.headers.host}`);
@@ -49,19 +52,13 @@ class WebSocket {
         this.rooms.get(roomId).set(clientId, ws);
 
         console.log(
-          `Client ${clientId} has connected to ${roomId} online chat room`
+          `Client ${clientId} has connected to ${roomId} online fleet room`
         );
 
-        // Event handler for incoming messages from clients
-        ws.on("message", (message) => {
-          /**
-           * Current date and time in formatted string.
-           * @type {string}
-           */
-          const created = dateUtil.nowFormated();
+        ws.isAlive = true;
 
-          // Broadcast the message to all clients in the roomId
-          this.broadcast(message.toString("utf-8"), roomId, created);
+        ws.on("pong", () => {
+          ws.isAlive = true;
         });
 
         ws.on("close", () => {
@@ -82,8 +79,11 @@ class WebSocket {
         });
 
         // Send a welcome message to the client
-        ws.send(`Welcome to the "${roomId}" online chat room`);
+        ws.send(`Welcome to the "${roomId}" online fleet room`);
       });
+
+      // Set up ping-pong mechanism
+      this.setupPingPong();
 
       WebSocket.instance = this;
     }
@@ -98,32 +98,47 @@ class WebSocket {
    * @param {string} created - The timestamp when the message was created.
    */
   broadcast(message, roomId, created) {
-    this.rooms.get(roomId).forEach((client) => {
-      /**
-       * Object containing message details.
-       * @type {Object}
-       */
-      const objMessage = {
-        created,
-        message,
-      };
-
-      // Send the message to the client
-      client.send(JSON.stringify(objMessage));
+    const room = this.rooms.get(roomId);
+    if (!room) {
+      console.log(`Room ${roomId} does not exist, cannot broadcast message.`);
+      return;
+    }
+    room.forEach((client) => {
+      client.send(message);
+    });
+  }
+  
+  
+  /**
+   * Initialize the WebSocket server to listen for Kafka messages.
+   */
+  async initKafkaConsumer() {
+    const kafkaInstance = new KafkaSingleton();
+    await kafkaInstance.init();
+    kafkaInstance.getConsumer('fleet');
+    kafkaInstance.on('message', ({ topic, message }) => {
+      const { roomId, created, ...rest } = JSON.parse(message);
+        this.broadcast(message, roomId);
     });
   }
 
   /**
-   * Initialize the WebSocket server to listen for Kafka messages.
+   * Set up the ping-pong mechanism to keep connections alive.
    */
-  initKafkaConsumer() {
-    const kafkaInstance = new KafkaSingleton();
-    kafkaInstance.init().then(() => {
-      kafkaInstance.getConsumer('fleet');
-      kafkaInstance.on('message', ({ topic, message }) => {
-        const { roomId, created, ...rest } = JSON.parse(message);
-        this.broadcast(JSON.stringify(rest), roomId, created);
+  setupPingPong() {
+    const interval = setInterval(() => {
+      this.wss.clients.forEach((ws) => {
+        if (!ws.isAlive) {
+          return ws.terminate();
+        }
+
+        ws.isAlive = false;
+        ws.ping();
       });
+    }, 15000); // Ping every 15 seconds
+
+    this.wss.on("close", () => {
+      clearInterval(interval);
     });
   }
 }

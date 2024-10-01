@@ -9,10 +9,10 @@ eventEmitter.on('location', async (data) => {
    kafkaInstance.produceMessage('fleet', JSON.stringify(data));
 });
 
-async function produceLocation(latitude, longitude, status, companyId, companyName) {
+async function produceLocation(latitude, longitude, status, roomId, companyName) {
 
   const data = {
-    latitude, longitude, status, companyId, companyName
+    latitude, longitude, status, roomId, companyName
   };
 
   eventEmitter.emit('location', data);

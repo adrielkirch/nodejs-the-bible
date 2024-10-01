@@ -9,8 +9,8 @@ async function produceLocation(req, res) {
   }
 
   try {
-    const {latitude, longitude, status, companyId, companyName } = req.body;
-    await fleetService.produceLocation(latitude, longitude, status, companyId, companyName);
+    const {latitude, longitude, status, roomId, companyName } = req.body;
+    await fleetService.produceLocation(latitude, longitude, status, roomId, companyName);
     res.status(StatusCodes.CREATED).json({
       message: "Location produced successfully",
       status: 200,
