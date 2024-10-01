@@ -30,7 +30,7 @@ class TestSecurityTools {
     const token = SecurityTools.generateJwt(this.userId, this.secretJwtKey);
     this.jwtToken = token;
     const tokenLength = token.length;
-    const isValidToken = tokenLength === 167;
+    const isValidToken = tokenLength > 64;
     assert.strictEqual(isValidToken, true, "JWT Token is invalid!");
 
     if (isValidToken) {
@@ -42,8 +42,8 @@ class TestSecurityTools {
     this.userId = SecurityTools.generateUUID();
     const token = SecurityTools.generateJwt(this.userId, this.secretJwtKey);
     this.jwtToken = token;
-    const userId = SecurityTools.decodedJwt(this.jwtToken, this.secretJwtKey);
-    const isSameUserId = userId === this.userId;
+    const data = SecurityTools.decodedJwt(this.jwtToken, this.secretJwtKey);
+    const isSameUserId = data.user === this.userId;
     assert.strictEqual(isSameUserId, true, "JWT Token is invalid!");
     if (isSameUserId) {
       console.log("decodedJwt() has passed in test\n");

@@ -22,12 +22,12 @@ class SecurityTools {
    * @param {string} secretJwtKey - The secret key used for signing the JWT.
    * @returns {string} A string representing the generated JWT.
    */
-  static generateJwt(userId, secretJwtKey) {
-    const payload = { user: userId };
+  static generateJwt(userId, secretJwtKey, days) {
+    const expiration = new Date().getTime() + days * 24 * 60 * 60 * 1000;
+    const payload = { user: userId, expiration };
     const token = jwt.sign(payload, secretJwtKey);
     return token;
   }
-
   /**
    * Decodes a JSON Web Token (JWT) to extract the user ID using the provided secret key.
    * @param {string} token - The JWT to decode.
@@ -37,7 +37,7 @@ class SecurityTools {
    */
   static decodedJwt(token, secretJwtKey) {
     const decoded = jwt.verify(token, secretJwtKey);
-    return decoded.user;
+    return decoded;
   }
 
   /**
@@ -84,30 +84,6 @@ class SecurityTools {
     const max = Math.pow(10, digits) - 1;
     const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
     return randomNumber.toString();
-  }
-
-  /**
-   * Removes a sensitive property from an object.
-   * @param {Object} data - The object from which to remove the property.
-   * @param {string} property - The name of the property to remove.
-   * @returns {Object} The object with the specified property removed.
-   */
-  static removeSensitiveProperty(data, property) {
-    Reflect.deleteProperty(data, property);
-    return data;
-  }
-
-  /**
-   * Removes multiple sensitive properties from an object.
-   * @param {Object} data - The object from which to remove the properties.
-   * @param {string[]} properties - An array containing the names of the properties to remove.
-   * @returns {Object} The object with the specified properties removed.
-   */
-  static removeSensitiveProperties(data, properties) {
-    for (let i = 0; i < properties.length; i++) {
-      Reflect.deleteProperty(data, properties[i]);
-    }
-    return data;
   }
 
   /**
@@ -173,17 +149,17 @@ class SecurityTools {
     });
   }
 
- /**
- * Creates a CORS middleware to handle Cross-Origin Resource Sharing policies.
- * @param {string} origin - The value to set for the Access-Control-Allow-Origin header.
- * @param {string} methods - The value to set for the Access-Control-Allow-Methods header.
- * @param {string} allowedHeaders - The value to set for the Access-Control-Allow-Headers header.
- * @param {boolean} credentials - Whether to allow credentials (Access-Control-Allow-Credentials header).
- * @param {number} optionsSuccessStatus - The status code to send for OPTIONS requests.
- * @returns {Function} Express middleware function for handling CORS.
- */
-static corsMiddleware(
-    origin = "*", 
+  /**
+   * Creates a CORS middleware to handle Cross-Origin Resource Sharing policies.
+   * @param {string} origin - The value to set for the Access-Control-Allow-Origin header.
+   * @param {string} methods - The value to set for the Access-Control-Allow-Methods header.
+   * @param {string} allowedHeaders - The value to set for the Access-Control-Allow-Headers header.
+   * @param {boolean} credentials - Whether to allow credentials (Access-Control-Allow-Credentials header).
+   * @param {number} optionsSuccessStatus - The status code to send for OPTIONS requests.
+   * @returns {Function} Express middleware function for handling CORS.
+   */
+  static corsMiddleware(
+    origin = "*",
     methods = "GET,HEAD,PUT,PATCH,POST,DELETE",
     allowedHeaders = "Origin, X-Requested-With, Content-Type, Accept, Authorization",
     credentials = true,
@@ -195,7 +171,7 @@ static corsMiddleware(
       res.header("Access-Control-Allow-Headers", allowedHeaders);
       res.header("Access-Control-Allow-Credentials", credentials);
       res.removeHeader("X-Powered-By");
-  
+
       if (req.method === "OPTIONS") {
         res.sendStatus(optionsSuccessStatus);
       } else {
@@ -203,6 +179,31 @@ static corsMiddleware(
       }
     };
   }
+
+  /**
+   * Removes a sensitive property from an object.
+   * @param {Object} data - The object from which to remove the property.
+   * @param {string} property - The name of the property to remove.
+   * @returns {Object} The object with the specified property removed.
+   */
+  static removeSensitiveProperty(data, property) {
+    Reflect.deleteProperty(data, property);
+    return data;
+  }
+
+  /**
+   * Removes multiple sensitive properties from an object.
+   * @param {Object} data - The object from which to remove the properties.
+   * @param {string[]} properties - An array containing the names of the properties to remove.
+   * @returns {Object} The object with the specified properties removed.
+   */
+  static removeSensitiveProperties(data, properties) {
+    for (let i = 0; i < properties.length; i++) {
+      Reflect.deleteProperty(data, properties[i]);
+    }
+    return data;
+  }
 }
+
 
 module.exports = SecurityTools;
